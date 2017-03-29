@@ -54,6 +54,8 @@
           animation-direction: @direction;
 }
 */
+
+/*
 html {
   font-size: 20px;
 }
@@ -72,6 +74,8 @@ html {
     font-size: 25.6px !important;
   }
 }
+*/
+
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
   font-family: sans-serif;

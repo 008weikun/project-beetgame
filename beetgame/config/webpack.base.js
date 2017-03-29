@@ -13,7 +13,7 @@ const entryFiles = utils.getEntries(baseConfig.entryFileDir, baseConfig.entryFil
 const config = {
 
 	entry: Object.assign(entryFiles, {
-    vendor: ['zepto', 'lodash', 'vue']
+    vendor: ['zepto', 'lodash']
   }),
 
 	output: {
@@ -135,7 +135,7 @@ const config = {
 
 // eslint-loader 只在开发过程中使用
 
-process.env.NODE_ENV !== 'production' &&  config.module.rules.push({
+/*process.env.NODE_ENV !== 'production' &&  config.module.rules.push({
   enforce: 'pre',
   test: /\.(jsx?|es)$/,
   loader: "eslint-loader",
@@ -143,7 +143,7 @@ process.env.NODE_ENV !== 'production' &&  config.module.rules.push({
     formatter: require('eslint-friendly-formatter')
   },
   exclude: /node_modules|bower_components/
-});
+});*/
 
 // html页面生成
 

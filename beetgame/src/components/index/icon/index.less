@@ -1,0 +1,26 @@
+@import '~components/base/less/mixins';
+
+[class^="card-icon-"], 
+[class*="card-icon-"] {
+	display: inline-block;
+	.px2rem(width, 40);
+	.px2rem(height, 40);
+	background-image: data-uri("./sprite.png");
+	.px2rem(background-size, 40);
+	background-position-x: 0;
+	vertical-align: middle;
+}
+
+.card-icon-fighting {
+	.px2rem(background-position-y, 0)
+}
+.card-icon-user {
+	.px2rem(background-position-y, -42)
+}
+.card-icon-money {
+	.px2rem(background-position-y, -42*2)
+}
+.card-icon-award {
+	.px2rem(background-position-y, -42*3)
+}
+

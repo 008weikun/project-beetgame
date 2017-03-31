@@ -1,0 +1,113 @@
+@import '~components/base/less/mixins';
+@import '../icon/index';
+
+.card.match {
+	.px2rem(border-radius, 10);
+	margin: 0;
+	.px2rem(margin-bottom, 20);
+	background: #262626;
+	color: #fff;
+	.px2px(font-size, 24);
+	[class*="btg-icon-"] {
+		transform: scale(.75);
+	}
+	.i-wrap {flex: 1;}
+	.i {
+		flex: 1;
+		.px2rem(line-height, 40);
+		.i-h {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			[class*="list-icon-"] {
+				.px2rem(margin-right, 12);
+			}
+			.px2rem(margin-bottom, 10);
+			color: #b0b0b0;
+			.px2px(font-size, 28);
+		}
+		.i-f {
+			[class*="btg-icon-"] {
+				.px2rem(margin-left, 10);
+			}
+			color: #dbdbdb;
+			.px2px(font-size, 26);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.i-f__span {
+				color: #b0b0b0;
+			}
+		}
+	}
+	.card-header {
+		.px2rem(padding-left, 20);
+		.px2rem(padding-right, 20);
+		.px2rem(padding-top, 20);
+		.px2rem(padding-bottom, 30);
+		.px2rem(line-height, 40);
+
+		.match-name {
+			.px2px(font-size, 28);
+		}
+		.match-tempt {
+			color: #b0b0b0;
+			.px2px(font-size, 24);
+		}
+		.pull-right {
+			float: none;
+			position: absolute;
+			right: 0;
+			.px2rem(top, 20);
+		}
+		.joined {
+			display: none;
+			.px2rem(width, 134);
+			.px2rem(height, 40);
+			background: data-uri('./joined.png') no-repeat;
+			.px2rem(background-size, 134);
+
+		}
+	}
+	.card-content-inner{
+		display: flex;
+		.px2rem(padding-left, 44);
+		.px2rem(padding-right, 44);
+		.px2rem(padding-top, 20);
+		.px2rem(padding-bottom, 20);
+		.match-ticket {
+			display: flex;
+			align-items: center;
+			&:before,
+			&:after {
+				display: block;
+				content: '';
+				width: 1px;
+				.px2rem(height, 40);
+				background: #424242;
+			}
+		}
+	}
+	.card-footer {
+		&:before{background-color: #242121;}
+		.px2rem(padding-left, 20);
+		.px2rem(padding-right, 20);
+		.px2rem(padding-top, 20);
+		.px2rem(padding-bottom, 20);
+		.px2rem(line-height, 30);
+		.match-time {
+			display: flex;
+			align-items: center;
+			.btg-icon-time {
+				.px2rem(margin-right, 10);
+			}
+		}
+	}
+
+}
+.card.match.is-joined {
+	border: 1px solid #fac913;
+	.joined {
+		display: block;
+	}
+}

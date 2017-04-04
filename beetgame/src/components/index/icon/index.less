@@ -11,16 +11,14 @@
 	vertical-align: middle;
 }
 
-.card-icon-fighting {
-	.px2rem(background-position-y, 0)
-}
-.card-icon-user {
-	.px2rem(background-position-y, -42)
-}
-.card-icon-money {
-	.px2rem(background-position-y, -42*2)
-}
-.card-icon-award {
-	.px2rem(background-position-y, -42*3)
+@cicons: fighting, user, money, award, dollar, plus, minus, t, ok;
+
+.loop-cicon(@i:1) when(@i =< length(@cicons)) {
+	@selector: escape(%("card-icon-%s", extract(@cicons, @i)));
+	.@{selector}{
+		.px2rem(background-position-y, -42*(@i - 1));
+	}
+	.loop-cicon(@i+1);
 }
 
+.loop-cicon();

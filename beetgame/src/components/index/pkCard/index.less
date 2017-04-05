@@ -1,0 +1,148 @@
+@import '~components/base/less/mixins';
+@import '~components/base/less/variables';
+@import '~components/icon/index';
+
+
+.game {
+	.card {
+		.team {
+			display: flex;
+			align-items: center;
+			color: @color-font-white;
+			.team-logo {
+				.px2rem(width, 100);
+				.px2rem(height, 70);
+				border: 1px solid @color-font-white;
+				text-align: center;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				.team-logo__img	{
+					.px2rem(width, 60);
+					.px2rem(height, 60);
+					vertical-align: top;
+				}
+			}
+			.team-name {
+				.px2rem(padding-right, 20);
+				.px2rem(padding-left, 20);
+				.px2px(font-size, 28);
+			}
+		}
+		.px2rem(padding-top, 10);
+		.px2rem(padding-bottom, 10);
+		.px2rem(padding-right, 40);
+		.px2rem(padding-left, 40);
+		margin: 0;
+		background: @color-bg-lightBlack;
+		color: #fff;
+		.card-header {
+			min-height: inherit;
+			.px2rem(line-height, 40);
+			padding: 0;
+			color: #b0b0b0;
+			.px2px(font-size, 24);
+			justify-content: center;
+		}
+		.card-content-inner {
+			padding: 0;
+			.pull-right {
+				.team {
+					flex-direction: row-reverse;
+				}
+			}
+			.vs-text {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				.px2px(font-size, 28);
+			}
+		}
+		.card-footer {
+			min-height: inherit;
+			.px2rem(line-height, 40);
+			padding: 0;
+			color: #fac913;
+			.px2px(font-size, 24);
+			justify-content: center;
+		}
+
+	}
+
+	.game-detail {
+		background: #4d4d4d;
+		.team {
+			.px2rem(padding-right, 50);
+			.px2rem(padding-left, 50);
+			.px2rem(padding-top, 20);
+			.px2rem(padding-bottom, 20);
+			.team-logo {
+				position: absolute;
+				.px2rem(width, 100);
+				.px2rem(height, 70);
+				border: 1px solid #fff;
+				text-align: center;
+				.team-logo__img	{
+					.px2rem(width, 60);
+					.px2rem(height, 60);
+					vertical-align: top;
+				}
+			}
+
+			.team-inner-wrap {
+				.px2rem(line-height, 35);
+				.px2rem(padding-left, 120);
+				color: #fff;
+				.px2px(font-size, 24);
+				border-bottom: 1px solid #262626;
+			}
+			&:last-child .team-inner-wrap {
+				border-bottom: none;
+			}
+			.team-name {}
+			.team-data {
+				display: flex;
+				align-items: center;
+				color: #b0b0b0;
+				[class*="btg-icon-"] {
+					transform: scale(.8);
+					.px2rem(margin-right, 10);
+				}
+				.team-data__span {
+					color: #fff;
+					.px2rem(margin-left, 10);
+
+				}
+				.btg-icon-cup {
+					.px2rem(margin-left, 30);
+				}
+			}
+			.team-members {
+				white-space: nowrap;
+    			overflow: scroll;
+    			-webkit-overflow-scrolling : touch;  
+				.px2rem(padding-top, 20);
+				.px2rem(padding-bottom, 20);
+
+				.member {
+					display: inline-block;
+					.px2rem(width, 100);
+					text-align: center;
+				}
+				.member-avatar {}
+				.member-avatar__img {
+					.px2rem(width, 80);
+					.px2rem(height, 80);
+					border: 1px solid #fff;
+					border-radius: 50%;
+					vertical-align: top;
+				}
+				.member-name {
+					.px2rem(padding-top, 10);
+					.px2px(font-size, 24);
+				}
+			}
+		}
+	}
+}

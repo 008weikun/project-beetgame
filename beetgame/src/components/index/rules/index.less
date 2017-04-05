@@ -1,0 +1,33 @@
+@import '~components/base/less/mixins';
+@import '~components/base/less/variables';
+.rules {
+	background: #2c2c2c;
+	.list {
+		margin: 0;
+		padding: 0;
+		.px2rem(padding-left, 40);
+		.px2rem(padding-right, 40);
+		color: #fff;
+		.px2px(font-size, 24);
+		background: @color-bg-lightBlack;
+		list-style: none;
+	}
+	.list-item {
+		.px2rem(line-height, 40);
+		.px2rem(padding-top, 20);
+		.px2rem(padding-bottom, 20);
+		border-bottom: 1px solid @color-font-lightBlack;
+	}
+	.list-item:last-child {
+		border-bottom: none;
+	}
+	.color-yellow {
+		color: @color-font-yellow;
+	}
+	.color-gray {
+		color: @color-font-gray;
+	}
+	p {
+		margin: 0;
+	}
+}

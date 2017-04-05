@@ -1,4 +1,5 @@
 @import '~components/base/less/mixins';
+@import '~components/base/less/variables';
 @import '../icon/index';
 
 .topbar {
@@ -17,7 +18,7 @@
 		border-radius: 50%;
 	}
 	.pull-left {
-		color: #979797;
+		color: @color-font-gray;
 		.px2px(font-size, 26);
 		.topbar-val {
 			.px2rem(padding-left, 12);
@@ -36,8 +37,8 @@
 		.button {
 			top: 0;
 			.px2rem(line-height, 50);
-			border-color: #fac913;
-			color: #fac913;
+			color: @color-font-yellow;
+			border-color: currentColor;
 		}
 		.card-icon-fight {
 			.px2rem(margin-right, -10)

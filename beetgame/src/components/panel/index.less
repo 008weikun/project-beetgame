@@ -1,8 +1,10 @@
+@import '~components/base/less/mixins';
+@import '~components/base/less/variables';
 @import '~components/icon/index';
 
 .panel {
 	.px2rem(width, 600);
-	background: #2c2c2c;
+	background: @color-bg-lightBlack;
 }
 .panel.panel-left.panel-cover {.px2rem(left, -600);}
 body.with-panel-left-cover .panel-left {
@@ -21,7 +23,7 @@ body.with-panel-left-cover .panel-left {
 		.px2rem(width, 160);
 		.px2rem(height, 160);
 		border-radius: 50%;
-		border: 1px solid #fff;
+		border: 1px solid @color-font-white;
 		vertical-align: middle;
 	}
 	.user-nickname {
@@ -42,7 +44,7 @@ body.with-panel-left-cover .panel-left {
 		.px2rem(margin-bottom, 40);
     }
 	.user-level {
-		color: #fff;
+		color: @color-font-white;
 		.px2px(font-size, 24);
 		text-align: center;
 	}
@@ -54,12 +56,12 @@ body.with-panel-left-cover .panel-left {
 		.user-eval-processbar{
 			position: relative;
 			.px2rem(height, 2);
-			background-color: #fff;
+			background-color: @color-bg-white;
 			display: flex;
     		align-items: center;
 			.user-eval-processbar-inner {
 				.px2rem(height, 5);
-				background: #fac913;
+				background: @color-bg-yellow;
 				display: flex;
 				justify-content: flex-end;
     			align-items: center;
@@ -77,7 +79,7 @@ body.with-panel-left-cover .panel-left {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		color: #fff;
+		color: @color-font-white;
 		.px2px(font-size, 24);
 		.user-wealth__span {
 			.px2rem(padding-left, 10);
@@ -124,7 +126,7 @@ body.with-panel-left-cover .panel-left {
 		a {
 			display: block;
 			.px2rem(line-height, 60);
-			border-bottom: 1px solid #b0b0b0;
+			border-bottom: 1px solid @color-font-gray;
 			.px2rem(margin-top, 20);
 			background-image: url(./left.png);
 			background-position: center right;

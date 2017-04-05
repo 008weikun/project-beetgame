@@ -1,7 +1,8 @@
 @import '~components/base/less/mixins';
+@import '~components/base/less/variables';
 
 #nav {
-	background-color: #2c2c2c;
+	background-color: @color-bg-lightBlack;
 	[class^="nav-icon-"], 
 	[class*="nav-icon-"] {
 		display: inline-block;
@@ -14,7 +15,7 @@
 	.icon {.px2rem(top, 4);}
 	.icon ~ .tab-label {
 		.px2rem(top, 3);
-		color: #fff
+		color: @color-font-white;
 	}
 	.active .icon ~ .tab-label {color: #efd162;}
 }

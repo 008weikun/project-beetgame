@@ -100,7 +100,15 @@ $(document).on('ajaxSuccess', function(event, xhr, options) {
 	var requestParams = options,
 		requestMethod = (options.type).toLowerCase();
 
-	if ( 1 == flag && 401 == status && token != getToken() ) {
+	var oldTokenValue = null;
+
+	if ('get' === requestMethod && _.isString(requestParams.url)) {
+		oldTokenValue = requestParams.url.match(tokenREG)[3];
+	} else if ('post' === requestMethod && _.isString(requestParams.data)) {
+		oldTokenValue =requestParams.data.match(tokenREG)[3];
+	}
+
+	if ( 1 == flag && 401 == status && token != oldTokenValue ) {
 		
 		setToken(config, token);
 

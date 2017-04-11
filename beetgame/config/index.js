@@ -22,7 +22,16 @@ module.exports = {
     port: '8080',
     publicPath: '/',
     contentBase: path.resolve(projectRoot, 'src'),
-    // proxy: {},
+    proxy: {
+      '/index/api': {
+        target: 'http://www.beetgame.cn',
+        secure: false
+      },
+      '/checktoken/index': {
+        target: 'http://www.beetgame.cn',
+        secure: false
+      }
+    },
     // setup(app){},
     // staticOptions: {},
     // 模块热更新

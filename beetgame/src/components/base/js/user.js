@@ -8,11 +8,11 @@ var $ = require('zepto');
 var store = require('store');
 var expirePlugin = require('store/plugins/expire');
 store.addPlugin(expirePlugin);
-var token = require('components/base/js/token.js');
+var token = require('components/base/js/token');
 
 function getUserInfo(callback) {
-	if (!_.isFunction(callback)) return;
 	var user = store.get('user');
+	if (!_.isFunction(callback)) return;
 	if (_.isPlainObject(user) && !_.isEmpty(user)) {
 		return callback(user);
 	} else {
@@ -29,8 +29,8 @@ function getUserInfo(callback) {
 					// 经验比值换算
 					experienceRatio = +userData.experience / +userData.max_expe
 					userData.experienceRatio = experienceRatio > 1 ? '100%' : experienceRatio*100 + '%';
+					store.set('user', userData, _.now() + 15*60*1000);
 					callback(userData);
-					store.remove('user'); store.set('user', userData, _.now() + 15*60*1000);
 				}
 		  	},
 		  	error: function(xhr, errorType, error){

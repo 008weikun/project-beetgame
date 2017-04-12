@@ -5,22 +5,42 @@
 
 var _ = require('lodash');
 var $ = require('zepto');
-var config = window.config || {};
+var store = require('store');
+var cookie = require('components/base/js/cookie');
+
+/**
+ * getTokenFromPage 从页面获取后端输出的token值
+ * 三种取值方式：DOM节点、对象引用、cookie
+ * @return {String} 
+ */
+function getTokenFromPage(handle) {
+	var token = null;
+	if (handle && handle.nodeType === 1) {
+		if ('input' == handle.tagName.toLowerCase() && 'hidden' == handle.type) {
+			token = handle.value;
+		}
+	} else if(handle && handle.token) {
+		token = handle.token;
+	} else if(_.isString(handle)) {
+		token = cookie.get(handle);
+	}
+	return setToken(token);
+}
+
 
 function getToken() {
-	var token = config.token;
+	var token = store.get('token') || getTokenFromPage(window.config);
 	if (validateToken(token)) return token;
 }
 
 /**
  * setToken
- * @param handler  token值的引用
  * @param {String} newTokenValue
  * @return {Stirng} newTokenValue
  */
-function setToken(handle, newTokenValue) {
+function setToken(newTokenValue) {
 	if (validateToken(newTokenValue)) {
-		return handle.token = newTokenValue;
+		return store.set('token', newTokenValue);
 	}
 }
 
@@ -30,8 +50,7 @@ function setToken(handle, newTokenValue) {
  * @return {Boolean}
  */
 function validateToken(tokenValue) {
-	if (!_.isEmpty(tokenValue) && _.isString(tokenValue) &&
-		 tokenValue.length === 192) {
+	if (!_.isEmpty(tokenValue) && _.isString(tokenValue)) {
 		return true;
 	} else {
 		console.warn('token值异常！');
@@ -44,19 +63,18 @@ function validateToken(tokenValue) {
  * @param  {String} url
  * @param  {String} oldTokenValue
  */
-function refreshToken(url, oldTokenValue) {
+function refreshToken(oldTokenValue) {
 	if (!validateToken(oldTokenValue)) return false;
 	$.ajax({
 		type: 'GET',
-		url: url,
+		url: '/checktoken/index',
 		data: {c:'api', t:oldTokenValue},
 		dataType: 'json', 
-		timeout: 500, 
 		success: function(data, status, xhr) {
-			var flag = data.code,
+			var flag  = data.code,
 				token = data.message;
-			if (1 == flag && token != getToken()) {
-				setToken(config, token);
+			if (1 == flag && token != oldTokenValue) {
+				setToken(token);
 			}
 	  	},
 	  	error: function(xhr, errorType, error){
@@ -72,9 +90,9 @@ var timer = null;
  * @param {String} 
  * @param {Number} time 毫秒 计时器运行周期， 后端token生命周期为1小时
  */
-function autoRefreshToken (url, time) {
+function autoRefreshToken (time) {
 	timer = setInterval(function(){
-		refreshToken(url, getToken());
+		refreshToken(getToken());
 	}, time);
 }
 
@@ -82,7 +100,7 @@ function stopAutoRefreshToken() {
 	window.clearInterval(timer);
 }
 
-autoRefreshToken('/checktoken/index', 30*60*1000);
+autoRefreshToken(30*60*1000);
 
 /**
  * token值失效后，自动用新的token值重新请求
@@ -110,7 +128,7 @@ $(document).on('ajaxSuccess', function(event, xhr, options) {
 
 	if ( 1 == flag && 401 == status && token != oldTokenValue ) {
 		
-		setToken(config, token);
+		setToken(token);
 
 		if ('get' === requestMethod && _.isString(requestParams.url)) {
 			requestParams.url = requestParams.url.replace(tokenREG, '$1' + token + '$4');

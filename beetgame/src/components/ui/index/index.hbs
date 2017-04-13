@@ -1,0 +1,13 @@
+<div class="page-room">
+	@require('./topbar/index.hbs')
+	<div class="content-wrap">
+		<div class="content pull-to-refresh-content infinite-scroll infinite-scroll-bottom">
+			<!-- 默认的下拉刷新层 -->
+			<div class="pull-to-refresh-layer">
+		        <div class="preloader"></div>
+		        <div class="pull-to-refresh-arrow"></div>
+		    </div>
+		    @require('./matchCard/index.hbs')
+		</div>
+	</div>
+</div>

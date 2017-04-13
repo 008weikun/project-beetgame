@@ -1,0 +1,62 @@
+{{#if data}}
+	{{#each data}}
+		{{#if this.participation}}
+		<div class="card match is-joined">
+		{{else}}
+		<div class="card match">
+		{{/if}}
+			<div class="card-header no-border">
+				<div class="pull-left">
+					<div class="match-name">{{this.rname}}</div>
+					<div class="match-tempt">{{this.award}}</div>
+				</div>
+				<div class="pull-right"> <div class="joined"></div> </div>
+			</div>
+			<div class="card-content">
+				<div class="card-content-inner">
+					<div class="match-numberofpeple i-wrap">
+						<div class="i">
+							<div class="i-h"><span class="card-icon-user"></span>人数</div>
+							{{#if this.isfull}}
+							<div class="i-f is-full
+							">
+							{{else}}
+							<div class="i-f">
+							{{/if}}
+								<span class="i-f__value">{{this.pnum}}</span>
+								<span class="i-f__span">/{{this.mpnum}}</span>
+							</div>
+						</div>
+					</div>
+					<div class="match-ticket i-wrap">
+						<div class="i">
+							<div class="i-h"><span class="card-icon-money"></span>门票</div>
+							<div class="i-f">
+								<span class="i-f__value">{{this.jcost}}</span>
+								<span class="btg-icon-chip"></span>
+							</div>
+						</div>
+					</div>
+					<div class="match-award i-wrap">
+						<div class="i">
+							<div class="i-h"><span class="card-icon-award"></span>奖金</div>
+							<div class="i-f">
+								<span class="i-f__value">{{this.bonus}}</span>
+								<span class="btg-icon-{{formatIcon this.btype
+								}}"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-footer">
+				<div class="match-time">
+					<span class="btg-icon-time"></span>
+					<span class="match-time__span">{{formatDate this.stime}}</span>
+				</div>
+			</div>
+		</div>
+	{{/each}}
+{{else}}
+	<div class="placeholder"></div>
+{{/if}}

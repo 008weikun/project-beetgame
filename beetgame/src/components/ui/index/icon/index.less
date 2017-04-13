@@ -1,0 +1,24 @@
+@import '~components/base/less/mixins';
+
+[class^="card-icon-"], 
+[class*="card-icon-"] {
+	display: inline-block;
+	.px2rem(width, 40);
+	.px2rem(height, 40);
+	background-image: data-uri("./sprite.png");
+	.px2rem(background-size, 40);
+	background-position-x: 0;
+	vertical-align: middle;
+}
+
+@cicons: fighting, user, money, award, dollar, plus, minus, t, ok;
+
+.loop-cicon(@i:1) when(@i =< length(@cicons)) {
+	@selector: escape(%("card-icon-%s", extract(@cicons, @i)));
+	.@{selector}{
+		.px2rem(background-position-y, -42*(@i - 1));
+	}
+	.loop-cicon(@i+1);
+}
+
+.loop-cicon();

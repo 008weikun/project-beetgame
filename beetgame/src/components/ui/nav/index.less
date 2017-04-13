@@ -1,0 +1,31 @@
+@import '~components/base/less/mixins';
+@import '~components/base/less/variables';
+
+#nav {
+	background-color: @color-bg-lightBlack;
+	[class^="nav-icon-"], 
+	[class*="nav-icon-"] {
+		display: inline-block;
+		.px2rem(width, 56);
+		.px2rem(height, 56);
+		background-image: url(./sprite.png);
+		.px2rem(background-size, 56);
+		background-position-x: 0
+	}
+	.icon {.px2rem(top, 4);}
+	.icon ~ .tab-label {
+		.px2rem(top, 3);
+		color: @color-font-white;
+	}
+	.active .icon ~ .tab-label {color: #efd162;}
+}
+
+.nav-icon-bee {background-position-y: 0;}
+.nav-icon-bee-reverse {.px2rem(background-position-y, -58);}
+.active .nav-icon-bee-reverse:extend(.nav-icon-bee){}
+.nav-icon-mall {.px2rem(background-position-y, -58*2);}
+.active .nav-icon-mall-reverse:extend(.nav-icon-mall){}
+.nav-icon-mall-reverse {.px2rem(background-position-y, -58*3);}
+.nav-icon-rank {.px2rem(background-position-y, -58*4);}
+.active .nav-icon-rank-reverse:extend(.nav-icon-rank){}
+.nav-icon-rank-reverse {.px2rem(background-position-y, -58*5);}

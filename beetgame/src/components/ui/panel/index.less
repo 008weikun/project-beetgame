@@ -1,0 +1,149 @@
+@import '~components/base/less/mixins';
+@import '~components/base/less/variables';
+@import '~components/icon/index';
+
+.panel {
+	.px2rem(width, 600);
+	background: @color-bg-lightBlack;
+}
+.panel.panel-left.panel-cover {.px2rem(left, -600);}
+body.with-panel-left-cover .panel-left {
+    -webkit-transform: translate3d(15rem, 0, 0);
+    transform: translate3d(15rem, 0, 0);
+}
+
+#panel {
+	.user {}
+	.user-avatar {
+		.px2rem(padding-top, 130);
+		.px2rem(padding-bottom, 30);
+		text-align: center;
+	}
+	.user-avatar__img {
+		.px2rem(width, 160);
+		.px2rem(height, 160);
+		border-radius: 50%;
+		border: 3px solid @color-font-white;
+		vertical-align: middle;
+	}
+	.user-nickname {
+		.px2rem(height, 40);
+		.px2rem(line-height, 40);
+		.px2px(font-size, 28);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		.user-nickname__span {
+			.px2rem(padding-left, 20);
+			.px2rem(padding-right, 20);
+			color: @color-font-white;
+
+		}
+    }
+    .user-inner-wrap {
+    	.px2rem(margin-top, 40);
+		.px2rem(margin-bottom, 40);
+    }
+	.user-level {
+		color: @color-font-white;
+		.px2px(font-size, 24);
+		text-align: center;
+	}
+	.user-eval {
+		.px2rem(padding-left, 80);
+		.px2rem(padding-right, 80);	
+		.px2rem(padding-top, 20);
+		.px2rem(padding-bottom, 20);	
+		.user-eval-processbar{
+			position: relative;
+			.px2rem(height, 2);
+			background-color: @color-bg-white;
+			display: flex;
+    		align-items: center;
+			.user-eval-processbar-inner {
+				position: relative;
+				.px2rem(height, 5);
+				background: @color-bg-yellow;
+				display: flex;
+    			align-items: center;
+				.user-eval-processbar__span {
+					position: absolute;
+					top: 50%;
+					transform: translateY(-50%);
+					right: 0;
+					display: inline-block;
+					.px2rem(width, 16);
+					.px2rem(height, 16);
+					background: #fac913;
+					border-radius: 50%;
+				}
+			}
+		}
+	}
+	.user-wealth {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: @color-font-white;
+		.px2px(font-size, 24);
+		.user-wealth__span {
+			.px2rem(padding-left, 10);
+			.px2rem(padding-right, 10);
+		}
+	}
+	.sign {
+		@color: #fac913;
+		.px2rem(margin-top, 40);
+		.px2rem(margin-bottom, 40);
+		.px2px(font-size, 24);
+		color: #fff;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		.button{
+			display: inline-block;
+			.px2rem(height, 50);
+			.px2rem(line-height, 50);
+			.px2rem(margin-right, 10);
+			.px2px(font-size, 26);
+		}
+		.button-warning {
+			background-color: @color;
+			color: #000;
+		}
+		.disabled {
+			color: white;
+    		background-color: #c8c9cb;
+		}
+		span {
+			.px2rem(padding-left, 10);
+			.px2rem(padding-right, 10);
+			color: @color;
+			.px2px(font-size, 26);
+		}
+	}
+	.links {
+		list-style: none;
+		.px2rem(padding-left, 80);
+		.px2rem(padding-right, 80);
+		color: #b0b0b0;
+		.px2px(font-size, 26);
+		a {
+			display: block;
+			.px2rem(line-height, 60);
+			border-bottom: 1px solid @color-font-gray;
+			.px2rem(margin-top, 20);
+			background-image: url(./left.png);
+			background-position: center right;
+			background-repeat: no-repeat;
+			.px2rem(background-size, 16);
+			color: inherit;
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			[class*="btg-icon-"] {
+				.px2rem(margin-right, 10);
+			}
+		}
+	}
+}

@@ -1,0 +1,25 @@
+@import '~components/base/less/mixins';
+
+[class^="btg-icon-"], 
+[class*="btg-icon-"] {
+	display: inline-block;
+	.px2rem(width, 30);
+	.px2rem(height, 30);
+	background-image: url(./sprite.png);
+	.px2rem(background-size, 30);
+	background-position-x: 0;
+	vertical-align: middle;
+}
+
+@icons: bee, chip, bottole, setting, pay, accountbook, record, qa, time, money, del, fan, graymoney, rate, status, cup, flower;
+
+.loop-icon(@i:1) when(@i =< length(@icons)) {
+	@selector: escape(%("btg-icon-%s", extract(@icons, @i)));
+	.@{selector}{
+		.px2rem(background-position-y, -32*(@i - 1));
+	}
+	.loop-icon(@i+1);
+}
+
+.loop-icon();
+

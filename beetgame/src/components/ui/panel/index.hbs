@@ -1,0 +1,50 @@
+<div class="panel-overlay"></div>
+<div class="panel panel-left panel-cover" id="panel">
+	<div class="user">
+		<a href="/usercenter/pay">
+			<div class="user-avatar">
+				{{#if head_pic}}
+					<img src="{{head_pic}}" alt="" class="user-avatar__img">
+				{{else}}
+					<img src="./avatar.png" alt="" class="user-avatar__img">
+				{{/if}}
+			</div>
+			<div class="user-nickname">
+				<span class="user-nickname__span">{{name}}</span>
+				<span class="btg-icon-setting"></span>
+			</div>
+		</a>
+		<div class="user-inner-wrap">
+			<div class="user-level">LV{{rank}}</div>
+			<div class="user-eval">
+				<div class="user-eval-processbar">
+					<div class="user-eval-processbar-inner" style="width:{{experienceRatio}}">
+						<span class="user-eval-processbar__span"></span>
+					</div>
+				</div>
+			</div>
+			<div class="user-wealth">
+				<span class="btg-icon-bee"></span>
+				<span class="user-wealth__span">{{one_level}}</span>
+				<span class="btg-icon-chip"></span>
+				<span class="user-wealth__span">{{two_level}}</span>
+				<span class="btg-icon-bottole"></span>
+				<span class="user-wealth__span">{{three_level}}</span>
+			</div>
+		</div>
+	</div> 
+	<div class="sign">
+		{{#if sign}}
+			<a href="javascript:;" class="button button-fill button-warning disabled">已签到</a>
+		{{else}}
+			<a href="javascript:;" class="button button-fill button-warning">签到</a>
+		{{/if}}
+		已连续签到<span>{{sign_number}}</span>天
+	</div> 
+	<div class="links">
+		<a href="/usercenter/pay"><span class="btg-icon-pay"></span>充值中心</a>
+		<a href="/usercenter/accountbook"><span class="btg-icon-accountbook"></span>我的账本</a>
+		<a href="/usercenter/exchange"><span class="btg-icon-record"></span>兑换记录</a>
+		<a href=""><span class="btg-icon-qa"></span>常见问题</a>
+	</div>  	
+</div>

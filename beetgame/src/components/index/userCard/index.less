@@ -1,0 +1,195 @@
+@import '~components/base/less/mixins';
+@import '~components/base/less/variables';
+@import '~components/icon/index';
+@import '../icon/index';
+
+
+.card.user {
+	margin: 0;
+	.px2rem(margin-bottom, 10);
+	&:last-child {
+		margin-bottom: 0;
+	}
+	background: @color-bg-lightBlack;
+	color: @color-font-white;
+	.px2px(font-size, 24);
+	[class*="btg-icon-"] {
+		transform: scale(.75);
+	}
+	[class*="card-icon-"] {
+		transform: scale(.65);
+		filter: grayscale(100%);
+	}
+	.i-wrap {flex: 1;}
+	.i {
+		flex: 1;
+		.px2rem(line-height, 40);
+		.i-h {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			// .px2rem(margin-bottom, 10);
+			color: @color-font-gray;
+			.px2px(font-size, 24);
+			[class*="card-icon-"] {
+				.px2rem(margin-right, 12);
+			}
+		}
+		.i-f {
+			color: @color-font-white;
+			.px2px(font-size, 26);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.i-f__span {
+				color: @color-font-gray;
+			}
+		}
+	}
+	.user-ticket {
+		display: flex;
+		align-items: center;
+		&:before,
+		&:after {
+			display: block;
+			content: '';
+			width: 1px;
+			.px2rem(height, 40);
+			background: #424242;
+		}
+	}
+	.card-header {
+		.px2rem(padding-left, 40);
+		.px2rem(padding-right, 40);
+		.px2rem(padding-top, 20);
+		.px2rem(padding-bottom, 20);
+		.px2rem(line-height, 40);
+
+		.match-name {
+			.px2px(font-size, 28);
+
+			.refresh-tips {
+				display: inline-block;
+				.px2rem(padding-top, 4);
+				.px2rem(padding-bottom, 4);
+				.px2rem(padding-left, 25);
+				.px2rem(padding-right, 25);
+				.px2rem(border-radius, 30);
+				border: 1px solid currentColor;
+				color: @color-font-yellow;
+				.px2px(font-size, 24);
+				&:before{
+					content: '\5237\65B0';
+				}
+				transform: scale(0.85);
+			}
+		}
+		.match-tempt {
+			color: @color-font-grayWhite;
+			.px2px(font-size, 24);
+		}
+		.pull-right {
+			float: none;
+			position: absolute;
+			right: 0;
+			.px2rem(top, 20);
+		}
+		.share-tips {
+			.px2rem(width, 166);
+			.px2rem(height, 40);
+			background: data-uri('./share.png') no-repeat;
+			.px2rem(background-size, 166);
+
+		}
+	}
+	.card-content-inner{
+		.px2rem(padding-left, 44);
+		.px2rem(padding-right, 44);
+		.px2rem(padding-top, 20);
+		.px2rem(padding-bottom, 20);
+		.award {
+			color: @color-font-gray;
+			text-align: center;
+		}
+		.award__span {
+			.px2rem(padding-left, 10);
+			.px2rem(padding-right, 10);
+			color: @color-font-yellow;
+		}
+
+		.processbar{
+			position: relative;
+			.px2rem(height, 6);
+			.px2rem(margin-top, 100);
+			.px2rem(margin-bottom, 60);
+			background-color: #777;
+			display: flex;
+    		align-items: center;
+			.processbar-inner {
+				.px2rem(height, 6);
+				background: #74b8e0;
+				.px2px(font-size, 24);
+				display: flex;
+				justify-content: flex-end;
+    			box-shadow: 0 0 5px #74b8e0;
+    			.processbar-text {
+    				display: flex;
+    				flex-wrap: wrap;
+    				justify-content: center;
+    				align-content: flex-start;
+    				position: absolute;
+    				.px2rem(bottom, -8);
+    				width: 1px;
+    				height: 100%;
+    				.px2rem(line-height, 30);
+					color: @color-font-yellow;
+    				text-align: center;
+    			}
+				.processbar__div {
+				}
+				.processbar__value {
+
+				}
+			}
+		
+			.user-avatar {
+				position: absolute;
+				.px2rem(bottom, 12);
+				display: inline-block;
+				.px2rem(width, 1);
+				.px2rem(height, 80);
+			}
+			.user-avatar__bg {
+				position: absolute;
+				left: 0;
+				top: 0;
+				.px2rem(width, 70);
+				.px2rem(height, 80);
+				transform: translateX(-50%);
+				img {
+					width: 100%;
+					height: auto;
+					vertical-align: top;
+				}
+			}
+			.user-avatar__img {
+				.px2rem(width, 70);
+				.px2rem(height, 70);
+				border-radius: 50%;
+				vertical-align: top;
+				transform: translateX(-50%);
+			}
+		}
+
+	}
+	.card-footer {
+		&:before{background-color: #1b1919;}
+		.px2rem(padding-left, 20);
+		.px2rem(padding-right, 20);
+		.px2rem(padding-top, 20);
+		.px2rem(padding-bottom, 20);
+		.px2rem(line-height, 30);
+		
+	}
+
+}

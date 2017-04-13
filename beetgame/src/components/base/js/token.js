@@ -67,8 +67,10 @@ function refreshToken(oldTokenValue) {
 	if (!validateToken(oldTokenValue)) return false;
 	$.ajax({
 		type: 'GET',
-		url: '/checktoken/index',
-		data: {c:'api', t:oldTokenValue},
+		url: '/api/checktoken',
+		headers: {
+			Authorization: 'Bearer ' + oldTokenValue
+		},
 		dataType: 'json', 
 		success: function(data, status, xhr) {
 			var flag  = data.code,
@@ -106,9 +108,9 @@ autoRefreshToken(30*60*1000);
  * token值失效后，自动用新的token值重新请求
  */
 
-var tokenREG = /((^|\?|&)?t=)([^&]*)(&|$)?/;
+// var tokenREG = /((^|\?|&)?t=)([^&]*)(&|$)?/;
 
-$(document).on('ajaxSuccess', function(event, xhr, options) {
+$(document).on('ajaxError', function(event, xhr, options) {
 
 	var	responseData = JSON.parse(xhr.responseText);
 		flag  = responseData.code,
@@ -116,25 +118,19 @@ $(document).on('ajaxSuccess', function(event, xhr, options) {
 		status = responseData.status;
 
 	var requestParams = options,
-		requestMethod = (options.type).toLowerCase();
+		oldTokenValue = requestParams.headers && 
+						requestParams.headers['Authorization'] && 
+						requestParams.headers['Authorization'].split(/\s+/).pop();
 
-	var oldTokenValue = null;
-
-	if ('get' === requestMethod && _.isString(requestParams.url)) {
-		oldTokenValue = requestParams.url.match(tokenREG)[3];
-	} else if ('post' === requestMethod && _.isString(requestParams.data)) {
-		oldTokenValue =requestParams.data.match(tokenREG)[3];
-	}
 
 	if ( 1 == flag && 401 == status && token != oldTokenValue ) {
 		
 		setToken(token);
 
-		if ('get' === requestMethod && _.isString(requestParams.url)) {
-			requestParams.url = requestParams.url.replace(tokenREG, '$1' + token + '$4');
-		} else if ('post' === requestMethod && _.isString(requestParams.data)) {
-			requestParams.data =requestParams.data.replace(tokenREG, '$1' + token + '$4');
-		}
+		if (_.isPlainObject(requestParams.headers)) {
+			requestParams.headers['Authorization'] = 'Bearer ' + token;
+		} 
+
 		$.ajax(requestParams);
 	}
 });

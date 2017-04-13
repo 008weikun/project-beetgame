@@ -18,8 +18,10 @@ function getUserInfo(callback) {
 	} else {
 		$.ajax({
 			type: 'GET',
-			url: '/index/api',
-			data: {aPath:'btuser', c:'api', t:token.getToken()},
+			url: '/api/btuser',
+			headers: {
+				Authorization: 'Bearer ' + token.getToken()
+			},
 			dataType: 'json', 
 			success: function(resp, status, xhr) {
 				var userData = resp.data,

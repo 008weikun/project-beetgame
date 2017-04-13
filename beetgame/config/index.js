@@ -23,11 +23,7 @@ module.exports = {
     publicPath: '/',
     contentBase: path.resolve(projectRoot, 'src'),
     proxy: {
-      '/index/api': {
-        target: 'http://www.beetgame.cn',
-        secure: false
-      },
-      '/checktoken/index': {
+      '/api': {
         target: 'http://www.beetgame.cn',
         secure: false
       }

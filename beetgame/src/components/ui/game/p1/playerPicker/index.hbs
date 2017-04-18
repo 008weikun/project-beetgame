@@ -1,0 +1,39 @@
+<div class="player-picker">
+	<div class="player-picker-div clearfix">
+		<div class="pull-left">拥有薪金<span class="player-picker-div__span" id="J_purse">{{money}}</span></div>
+		<div class="pull-right">
+			<a href="javascript:;" class="button" id="J_clean"><span class="btg-icon-del"></span>清空</a>
+		</div>
+	</div>
+	<div class="player-picker-swiper">
+		<div class="swiper-container" id="J_playerPickerSwiper">
+		    <div class="swiper-wrapper">
+				{{#each choosen as |value key|}}
+					 <div class="swiper-slide">
+						 {{#if value}}
+						<div class="player-card" data-role="{{key}}" data-playerid="{{value.playerid}}">
+							{{{getPlayerRoleIcon key}}}
+							<div class="player-name">{{value.name}}</div>
+							<div class="player-avatar">
+								<img src="{{value.avatar}}" alt="头像" class="player-avatar__img">
+							</div>
+						</div>
+						{{else}}
+						<div class="player-card" data-role="{{key}}" data-playerid="">
+							{{{getPlayerRoleIcon key}}}
+							<div class="player-name">选择队员</div>
+							<div class="player-avatar">
+								<img src="./avatar1.png" alt="头像" class="player-avatar__img">
+							</div>
+						</div>
+						{{/if}}
+					</div>
+				{{/each}}
+		    </div>
+		</div>
+	</div>
+	<div class="player-picker-btns clearfix">
+		<a href="javascript:;" class="pull-left button button-fill" id="J_quickLineUp">一键阵容</a>
+		<a href="javascript:;" class="pull-right button button-fill" id="J_submitLineUp">提交阵容</a>
+	</div>
+</div>

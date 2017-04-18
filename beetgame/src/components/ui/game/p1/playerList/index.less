@@ -1,0 +1,82 @@
+@import '~components/base/less/mixins';
+@import '~components/base/less/variables';
+@import '~components/ui/index/icon/index';
+
+.player {
+	.px2rem(padding-left, 40);
+	.px2rem(padding-right, 40);
+	.px2rem(padding-top, 30);
+	.px2rem(padding-bottom, 30);
+	.px2rem(line-height, 40);
+	background: @color-bg-lightBlack;
+	border-bottom: 1px solid @color-font-lightBlack;
+	&:last-child {
+		border-bottom: none;
+	}
+	color: #b0b0b0;
+	.px2px(font-size, 24);
+	.pull-left {
+		position: relative;
+		width: 50%;
+		display: flex;
+		align-items: center;
+	}
+	.pull-right {
+		position: relative;
+		width: 50%;
+		.player-inner-wrap {
+			.px2rem(padding-left, 60);	
+		}
+		.player-choose-btn {
+			position: absolute;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			display: flex;
+			align-items: center;
+		}
+	}
+	span[class^="player-"] {
+		.px2rem(padding-left, 10);
+		color: @color-font-white;
+	}
+	.player-inner-wrap {
+		.px2rem(padding-left, 110);
+	}
+	.player-avatar{
+		position: absolute;
+		.player-avatar__img {
+			.px2rem(width, 100);
+			.px2rem(height, 100);
+			border-radius: 50%;
+			border: 1px solid @color-font-white;
+			vertical-align: middle;
+		}
+	}
+	.player-name{
+		color: #fff;
+	}
+	.player-team{
+		.player-team__span {}
+	}
+	.player-opposite{
+		.player-opposite__span {
+			color: @color-font-gray;
+		}
+	}
+	.player-foregift{
+		.card-icon-dollar{
+			.px2rem(margin-right, -10);
+			vertical-align: top;
+			transform: scale(.7);
+		}
+	}
+	.player-fansvalue{
+		.player-fansvalue__span {}
+	}
+	.player-status{
+		.player-status__span {}	
+	}
+}
+
+.player-list {}

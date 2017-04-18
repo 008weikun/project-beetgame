@@ -1,0 +1,29 @@
+{{#each data as |value key|}}
+    {{#each value}}
+        <div class="player clearfix" data-teamid="{{this.teamid}}" data-playerid="{{this.playerid}}">
+            <div class="pull-left">
+                <div class="player-avatar">
+                    <img src="{{this.avatar}}" alt="头像" class="player-avatar__img">
+                </div>
+                <div class="player-inner-wrap">
+                    <div class="player-name">{{this.name}}</div>
+                    <div class="player-team">所属战队<span class="player-team__span">{{this.teamname}}</span></div>
+                    <div class="player-opposite">vs<span class="player-opposite__span">{{this.vsteam}}</span></div>
+                </div>
+            </div>
+            <div class="pull-right">
+                <div class="player-inner-wrap">
+                    <div class="player-foregift">
+                        <span class="card-icon-dollar"></span> 
+                        <span class="player-foregift__span">{{this.price}}</span>
+                    </div>
+                    <div class="player-fansvalue">Fan值<span class="player-fansvalue__span">39.04</span></div>
+                    <div class="player-status">状态<span class="player-status__span">1</span></div>
+                </div>
+                <div class="player-choose-btn">
+                    {{{togglePlusAndMinusIcon this.playerid}}}
+                </div>
+            </div>
+        </div>
+    {{/each}}
+{{/each}}

@@ -1,0 +1,121 @@
+@import '~components/base/less/mixins';
+@import '~components/base/less/variables';
+@import '~components/ui/icon/index';
+@import '~swiper/dist/css/swiper.min.css';
+[class^="role-icon-"], 
+[class*="role-icon-"] {
+	display: inline-block;
+	.px2rem(width, 66);
+	.px2rem(height, 66);
+	background-image: data-uri("./sprite.png");
+	.px2rem(background-size, 66);
+	background-position-x: 0;
+	vertical-align: middle;
+	transform: scale(.9);
+}
+.role-icon-t {background-position-y: 0}
+.role-icon-m {.px2rem(background-position-y, -68);}
+.role-icon-adc {.px2rem(background-position-y, -68*2);}
+.role-icon-y {.px2rem(background-position-y, -68*3);}
+.role-icon-f {.px2rem(background-position-y, -68*4);}
+.player-picker {
+	background: @color-bg-lightBlack;
+	.player-card {
+		position: relative;
+		border: 1px solid @color-font-yellow;
+		box-shadow: 0 0 10px @color-font-yellow;
+		.px2rem(width, 220);
+		.px2rem(height, 260);
+		background: @color-bg-lightBlack;
+		.player-role {
+			position: absolute;
+			left: 0;
+			top: 0;
+			z-index: 3;
+			transform: translate(-50%, -30%);
+		}
+		.player-role:nth-child(2) {
+			left: inherit;
+			top: inherit;
+			right: 0;
+			bottom: 0;
+			transform: translate(50%, 30%);
+		}
+		.player-name {
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			.px2rem(height, 50);
+			.px2rem(line-height, 50);			
+			color: #fff;
+			.px2px(font-size, 26 );
+			background: rgba(0,0,0,.5);
+			text-align: center;
+		}
+		.player-avatar {
+			overflow: hidden;
+			width: 100%;
+			height: 100%;
+			.player-avatar__img {
+				width: 100%;
+				height: auto;
+				vertical-align: top;
+			}
+		}
+	}
+	.player-picker-div {
+		overflow: hidden;
+		.px2rem(padding-left, 40);
+		.px2rem(padding-right, 40);
+		.px2rem(padding-top, 20);
+		.px2rem(padding-bottom, 20);
+		.px2rem(line-height, 50);
+		color: #fff;
+		.px2px(font-size, 28);
+		.player-picker-div__span {
+			.px2rem(margin-left, 12);
+			color: @color-font-yellow;
+		}
+		.button {
+			.px2rem(height, 50);
+			.px2rem(line-height, 50);
+			color: @color-font-gray;
+			border-color: currentColor;
+			.px2px(font-size, 24);
+			display: flex;
+			align-items: center;
+		}
+		.btg-icon-del {
+			.px2rem(margin-right, 8);
+			transform: scale(.9);
+		}
+	}
+	.player-picker-swiper {
+		.swiper-container {
+			width: 100%;
+			.px2rem(width, 666);
+			.px2rem(padding-top, 33);
+			.px2rem(padding-bottom, 33);
+			.swiper-slide {
+				.px2rem(width, 220);
+			}
+		}
+	}
+	.player-picker-btns {
+		.px2rem(padding-left, 80);
+		.px2rem(padding-right, 80);
+		.px2rem(padding-top, 30);
+		.px2rem(padding-bottom, 30);
+		.px2px(font-size, 26);
+		.button {
+			color: @color-font-lightBlack;	
+			.px2rem(height, 50);
+			.px2rem(line-height, 50);
+    		border-color: @color-font-yellow;
+		}
+		.button-fill {
+			background: @color-font-yellow;
+		}
+	}
+}

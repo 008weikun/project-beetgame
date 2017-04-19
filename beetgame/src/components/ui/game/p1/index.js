@@ -10,6 +10,7 @@ var token = require('components/base/js/token');
 var params = url.parseQuery(location.href);
 var root = $('#J_content .swiper-slide').eq(0);
 var role = '';
+var salary = 0;
 var roleDict = {adc: 'ADC', assis: '辅助', mid: '中单', up: '上单', wild: '打野'};
 var filterBarIcons = ['arrow-icon-default', 'arrow-icon-down', 'arrow-icon-up'];
 var filterBarFieldSelector = {
@@ -69,12 +70,21 @@ var filter = ({
     }
 }).init();
 
+var roles = {
+    'up': null, 
+    'adc': null,
+    'mid': null, 
+    'wild': null, 
+    'assis': null
+};
+
 /**
  * 获取玩家角色
  */
 function getRole() {
     return role;
 }
+
 /**
  * 设置玩家角色
  * @param {String} value 
@@ -84,6 +94,122 @@ function setRole(value) {
         role = value;
         return role;
     } 
+}
+
+/**
+ * 清除角色的玩家id
+ * @param {String} role 
+ */
+function clearRolePlayerId(role){
+    if ( roles.hasOwnProperty(role) ) {
+        roles[role] = null;
+        return true;
+    }
+    return false;
+}
+
+/**
+ * 清除所有角色的玩家id
+ */
+function clearAllRolesPlayerId() {
+    for (var key in roles) {
+        clearRolePlayerId(key);
+    }
+}
+
+function isAllRolesPlayerIdEmpty() {
+    for (var key in roles) {
+        if (roles.hasOwnProperty(key) && !!roles[key]) {
+            return false;
+        };
+    }
+    return true;
+}
+
+/**
+ * 获取角色的玩家id
+ * @param {String} role 
+ */
+function getRolePlayerId(role) {
+  if ( roles.hasOwnProperty(role) ) {
+        return roles[role];
+    }
+    return null;
+}
+
+/**
+ * 设置角色的玩家id
+ * @param {String} role 
+ * @param {String Number} id 
+ */
+function setRolePlayerId(role, id) {
+     if ( roles.hasOwnProperty(role) ) {
+        return roles[role] = id;
+    }
+}
+
+/**
+ * 设置所有角色的玩家id
+ * @param {Object} data 
+ */
+function setAllRolePlayerId(data) {
+    for (var key in data) {
+        if (!data.hasOwnProperty(key)) continue;
+        setRolePlayerId(key, data[key].playerid);
+    }
+}
+
+/**
+ * 获取玩家信息
+ * @param {Object} data ajax返回的数据
+ * @param {String} role 角色
+ * @param {String Number} id 玩家id
+ */
+function getPlayerInfo(data, role, id) {
+    var arr = data[role].slice();
+    var playerInfo = null;
+    arr.forEach(function(value){
+        if (id == value.playerid) {
+            playerInfo = value;
+            return false;
+        }
+    });
+    return playerInfo;
+}
+
+/**
+ * 初始化薪金总额度用来后期运算
+ * @param {Object} data ajax请求返回的数据
+ */
+function initSalary(data) {
+    var salary = data.money*1
+    var players = data.data;
+    var tmp = null;
+    for (var key in roles) {
+        if (!roles.hasOwnProperty(key)) continue;
+        tmp = getPlayerInfo(players, key, roles[key]);
+        if (tmp) {
+            salary += tmp.price*1;
+        }
+    }
+    return salary;
+}
+
+/**
+ * 计算薪金
+ * @param {Object} data ajax请求返回的数据
+ */
+function calcSalary(data) {
+    var tmp = null;
+    var s = salary;
+    for (var key in roles) {
+        if (!roles.hasOwnProperty(key)) continue;
+        tmp = getPlayerInfo(data, key, roles[key]);
+        if (tmp) {
+            s -= tmp.price*1;
+        }
+    }
+    return s;
 }
 
 /**
@@ -174,12 +300,12 @@ function togglePlayerList() {
  * @param {Number} type 0 默认排序 1 升序 2 降序
  */
 function sort(data, key, type) {
-    var obj = data.slice();
+    var arr = data.slice();
     if (0 === type) {
-        return obj;
+        return arr;
     }
     if (1 === type) {
-        return obj.sort(function (prev, next) {
+        return arr.sort(function (prev, next) {
             if ( parseFloat(prev[key]) > parseFloat(next[key]) ) {
                 return 1;
             } 
@@ -190,7 +316,7 @@ function sort(data, key, type) {
         });
     }
     if (2 === type) {
-        return obj.sort(function (prev, next) {
+        return arr.sort(function (prev, next) {
             if ( parseFloat(prev[key]) > parseFloat(next[key]) ) {
                 return -1;
             }
@@ -222,11 +348,136 @@ function updateFilterBarIcon() {
  */
 function renderPlayerListItem(data) {
     var role = getRole();
-    var stat = filter.getRoleStat(role);
     var dataList = data.data;
-    var newData = {choosen: data.choosen, data: {}};
+    var playerId = getRolePlayerId(role);
+    var stat = filter.getRoleStat(role);
+    var newData = {choosen: {}, data: {} };
+    if (!!playerId) {
+        newData.choosen[role] = getPlayerInfo(dataList, role, playerId);
+    } else {
+        newData.choosen[role] = {playerid:null};
+    }
     newData.data[role] = sort(dataList[role], stat.field, stat.order);
     root.find('#J_playerList').find('[data-role="'+ role + '"]').html(templatePlayerItem(newData));    
+}
+
+/**
+ * 创建coverflow效果
+ */
+function bootSwiper() {
+    var timer = null;
+    var playerPickerSwiper = new Swiper('#J_playerPickerSwiper', {
+        initialSlide: 2,
+        slideToClickedSlide: true,
+        centeredSlides: true,
+        loop: true,
+        slidesPerView: "auto", 
+        loopedSlides: 5,
+        // observer:true,
+        effect: "coverflow",
+        coverflow: {
+            rotate: 0,
+            stretch: 15,
+            depth: 400,
+            modifier: 1,
+            slideShadows: false,
+        },
+        onInit: function(swiper){
+            hackSwiper(swiper);
+            setFilterBarPlayerRoleName();
+            togglePlayerList();
+        },
+        onSetTranslate: function(swiper) {
+            hackSwiper(swiper);
+            timer && clearTimeout(timer);
+            timer = setTimeout(function() { 
+                setFilterBarPlayerRoleName();
+                togglePlayerList();
+                updateFilterBarIcon();
+            }, 100);
+        },
+    }); 
+    return playerPickerSwiper;
+}
+
+/**
+ * 渲染轮播图卡牌
+ * @param {*} role 玩家角色
+ * @param {*} playerInfo 玩家信息
+ */
+function renderSwiperSlide(role, playerInfo) {
+    var playerId = getRolePlayerId(role);
+    var swiperContainer = $('#J_playerPickerSwiper');
+    var slides = swiperContainer.find('[data-role="' + role +'"]');
+    if (!playerId) {
+        slides.find('.player-avatar img').attr('src', require('./playerPicker/avatar1.png'));
+        slides.find('.player-name').html('选择队员');            
+        return;
+    }
+    slides.find('.player-avatar img').attr('src', playerInfo.avatar).
+        on('error', function name(event) { // 如果图片不能正常加载就载入默认图片
+            $(this).attr('src', require('./playerPicker/avatar1.png'));
+        });
+    slides.find('.player-name').html(playerInfo.name);
+}
+
+/**
+ * 渲染轮播图所有的卡牌
+ * @param {*} roles 所有角色,代码头部有对其声明
+ * @param {*} data  所有的玩家数据
+ */
+function renderAllSwiperSlides(roles, data) {
+    for (var key in roles) {
+        if (roles.hasOwnProperty(key)) {
+            addOrRemoveRolePlayer(key, roles[key], data);
+        }
+    }
+}
+
+/**
+ * 
+ * @param {*} role 角色
+ * @param {*} playerId 玩家id
+ * @param {*} data 玩家数据
+ */
+function addOrRemoveRolePlayer(role, playerId, data) {
+
+    var SELECTOR_BUTTON = '.player-choose-btn span';
+    var SELECTOR_ROLE   = '[data-role="' + role + '"]';
+    var SELECTOR_PLAYER = '[data-playerid="'+ playerId + '"]';
+    var CLASSNAME_MINUS = 'card-icon-minus';
+    var CLASSNAME_PLUS  = 'card-icon-plus';
+
+    var playerList = $('#J_playerList');
+    var buttons = playerList.find(SELECTOR_ROLE).find(SELECTOR_BUTTON);
+    var currButton = playerList.find(SELECTOR_ROLE).find(SELECTOR_PLAYER).find(SELECTOR_BUTTON);
+    var oldPlayerId = getRolePlayerId(role);
+    var oldPlayerInfo = getPlayerInfo(data, role, oldPlayerId);
+    var oldPlayerPrice = !!oldPlayerInfo ? oldPlayerInfo.price*1 : 0;
+    var playerInfo  = null;
+
+
+    if ( playerId != oldPlayerId) { 
+        playerInfo = getPlayerInfo(data, role, playerId);
+        if (calcSalary(data) + oldPlayerPrice - playerInfo.price*1 <= 0 ) {
+            alert('薪金余额不足！')
+            return;
+        }
+        setRolePlayerId(role, playerId);
+        renderSwiperSlide(role, playerInfo);
+        buttons.removeClass().addClass(CLASSNAME_PLUS);
+        currButton.removeClass().addClass(CLASSNAME_MINUS);
+
+    } else {
+        clearRolePlayerId(role);
+        renderSwiperSlide(role);
+        if ( null == oldPlayerId ) {
+            buttons.removeClass().addClass(CLASSNAME_PLUS);
+        } else {
+            currButton.removeClass().addClass(CLASSNAME_PLUS);
+        }
+    }
+    $('#J_purse').html(calcSalary(data));
 }
 
 /**
@@ -235,8 +486,20 @@ function renderPlayerListItem(data) {
  */
 function bindEvent(data) {
 
-    root.on('click', '#J_clean', function (event) {
+    var swiper = bootSwiper();
     
+    if (1 == params.isJoined) {
+        setAllRolePlayerId(data.choosen);
+    }
+
+    salary = initSalary(data);
+
+    root.on('click', '#J_clean', function (event) {
+        if (isAllRolesPlayerIdEmpty()) {
+            return;
+        }
+        clearAllRolesPlayerId();
+        renderAllSwiperSlides(roles, data.data);
     });
 
     root.on('click', '#J_quickLineUp', function (event) {
@@ -266,46 +529,12 @@ function bindEvent(data) {
     });
 
     root.on('click', '#J_playerList .player-choose-btn span', function (event) {
-        
+        var role = getRole();
+        var $this = $(this);
+        var parent = $this.parents('.player');
+        var playerId = parent.data('playerid');
+        addOrRemoveRolePlayer(role, playerId, data.data);
     });
-}
-
-/**
- * 创建coverflow效果
- */
-function bootSwiper() {
-    var timer = null;
-    var playerPickerSwiper = new Swiper('#J_playerPickerSwiper', {
-        initialSlide: 2,
-        slideToClickedSlide: true,
-        centeredSlides: true,
-        loop: true,
-        slidesPerView: "auto", 
-        loopedSlides: 5,
-        observer:true,
-        effect: "coverflow",
-        coverflow: {
-            rotate: 0,
-            stretch: 15,
-            depth: 400,
-            modifier: 1,
-            slideShadows: false,
-        },
-        onInit: function(swiper){
-            hackSwiper(swiper);
-            setFilterBarPlayerRoleName();
-            togglePlayerList();
-        },
-        onSetTranslate: function(swiper) {
-            hackSwiper(swiper);
-            timer && clearTimeout(timer);
-            timer = setTimeout(function() { 
-                setFilterBarPlayerRoleName();
-                togglePlayerList();
-                updateFilterBarIcon();
-            }, 100);
-        },
-    }); 
 }
 
 function render(){
@@ -318,7 +547,6 @@ function render(){
             if (200 !== resp.status) return;
             resp = washRespData(resp, params.isJoined);
             root.append(template(resp));
-            bootSwiper();
             bindEvent(resp);
         });
     });

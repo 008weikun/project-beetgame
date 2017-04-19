@@ -3,7 +3,8 @@
         <div class="player clearfix" data-teamid="{{this.teamid}}" data-playerid="{{this.playerid}}">
             <div class="pull-left">
                 <div class="player-avatar">
-                    <img src="{{this.avatar}}" alt="头像" class="player-avatar__img">
+                    <img src="{{this.avatar}}" alt="头像" class="player-avatar__img" 
+                    onerror='this.src="@include("./avatar.png")"'>
                 </div>
                 <div class="player-inner-wrap">
                     <div class="player-name">{{this.name}}</div>

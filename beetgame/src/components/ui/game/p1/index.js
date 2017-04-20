@@ -7,6 +7,7 @@ var Swiper = require('swiper/dist/js/swiper.min');
 var template = require('./index.hbs');
 var templatePlayerItem = require('./playerList/item.hbs');
 var token = require('components/base/js/token');
+var avatar = require('components/ui/images/avatar/avatar2.png');
 
 var params = url.parseQuery(location.href);
 var root = $('#J_content .swiper-slide').eq(0);
@@ -411,13 +412,13 @@ function renderSwiperSlide(role, playerInfo) {
     var swiperContainer = $('#J_playerPickerSwiper');
     var slides = swiperContainer.find('[data-role="' + role +'"]');
     if (!playerId) {
-        slides.find('.player-avatar img').attr('src', require('./playerPicker/avatar1.png'));
+        slides.find('.player-avatar img').attr('src', avatar);
         slides.find('.player-name').html('选择队员');            
         return;
     }
     slides.find('.player-avatar img').attr('src', playerInfo.avatar).
         on('error', function name(event) { // 如果图片不能正常加载就载入默认图片
-            $(this).attr('src', require('./playerPicker/avatar1.png'));
+            $(this).attr('src', avatar);
         });
     slides.find('.player-name').html(playerInfo.name);
 }

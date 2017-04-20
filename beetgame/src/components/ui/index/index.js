@@ -1,7 +1,7 @@
 require('./index.less');
 var _ = require('lodash');
 var $ = require('zepto');
-var moment = require('moment/min/moment-with-locales.min.js');
+var moment = require('moment/min/moment-with-locales.min');
 var token = require('components/base/js/token');
 var template = require('./index.hbs');
 var roomTemplate = require('./matchCard/index.hbs');

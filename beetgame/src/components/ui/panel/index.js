@@ -1,6 +1,6 @@
 require('./index.less');
 var $ = require('zepto');
-var store = require('store');
+var store = require('store/dist/store.modern.min');
 var template = require('./index.hbs');
 var token = require('components/base/js/token');
 var getUserInfo = require('components/base/js/user');

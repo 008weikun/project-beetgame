@@ -5,7 +5,7 @@
 
 var _ = require('lodash');
 var $ = require('zepto');
-var store = require('store/dist/store.modern.min.js');
+var store = require('store/dist/store.modern.min');
 var cookie = require('components/base/js/cookie');
 
 /**

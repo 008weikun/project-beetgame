@@ -3,7 +3,7 @@ require('./helper');
 var $ = require('zepto');
 var _ = require('lodash');
 var url = require('url-lib');
-var Swiper = require('swiper/dist/js/swiper.min.js');
+var Swiper = require('swiper/dist/js/swiper.min');
 var template = require('./index.hbs');
 var templatePlayerItem = require('./playerList/item.hbs');
 var token = require('components/base/js/token');

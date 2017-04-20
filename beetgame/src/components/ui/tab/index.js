@@ -1,5 +1,5 @@
 require('components/sui/index');
-var Swiper = require('swiper');
+var Swiper = require('swiper/dist/js/swiper.min');
 
 var CUR_CLASS = 'current';
 

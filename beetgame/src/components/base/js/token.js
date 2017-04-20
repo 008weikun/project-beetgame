@@ -5,7 +5,7 @@
 
 var _ = require('lodash');
 var $ = require('zepto');
-var store = require('store');
+var store = require('store/dist/store.modern.min.js');
 var cookie = require('components/base/js/cookie');
 
 /**
@@ -111,7 +111,7 @@ autoRefreshToken(30*60*1000);
 // var tokenREG = /((^|\?|&)?t=)([^&]*)(&|$)?/;
 
 $(document).on('ajaxError', function(event, xhr, options) {
-
+	if (xhr.status !== 401) return;
 	var	responseData = JSON.parse(xhr.responseText);
 		flag  = responseData.code,
 		token = responseData.message,
@@ -136,7 +136,11 @@ $(document).on('ajaxError', function(event, xhr, options) {
 });
 
 
-[getToken, setToken, refreshToken, autoRefreshToken, stopAutoRefreshToken].forEach(function(value) {
-	module.exports[value.name] = value;
-});
+module.exports = {
+	getToken: getToken,
+	setToken: setToken,
+	refreshToken: refreshToken,
+	autoRefreshToken: autoRefreshToken, 
+	stopAutoRefreshToken: stopAutoRefreshToken
+};
 

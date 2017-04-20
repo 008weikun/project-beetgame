@@ -5,7 +5,7 @@
 
 var _ = require('lodash');
 var $ = require('zepto');
-var store = require('store');
+var store = require('store/dist/store.modern.min.js');
 var expirePlugin = require('store/plugins/expire');
 store.addPlugin(expirePlugin);
 var token = require('components/base/js/token');

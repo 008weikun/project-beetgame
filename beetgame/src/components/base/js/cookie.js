@@ -107,6 +107,10 @@ function get(name) {
 	 return true;	
  };
 
-[set, get, remove, has, once].forEach(function(value) {
-	module.exports[value.name] = value;
-});
+module.exports = {
+	set: set,
+	get: get,
+	remove: remove,
+	has: has,
+	once: once
+};

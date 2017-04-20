@@ -1,7 +1,7 @@
 require('./index.less');
 var _ = require('lodash');
 var $ = require('zepto');
-var moment = require('moment');
+var moment = require('moment/min/moment-with-locales.min.js');
 var token = require('components/base/js/token');
 var template = require('./index.hbs');
 var roomTemplate = require('./matchCard/index.hbs');
@@ -88,6 +88,6 @@ $(document).on('infinite', '.page-room .infinite-scroll-bottom',function() {
 	});
 });
 
-[render].forEach(function(value) {
-	module.exports[value.name] = value;
-});
+module.exports = {
+	render: render
+};

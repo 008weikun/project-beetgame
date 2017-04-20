@@ -13,6 +13,6 @@ function render() {
 	});
 }
 
-[render].forEach(function(value) {
-	module.exports[value.name] = value;
-});
+module.exports = {
+	render: render
+};

@@ -1,16 +1,12 @@
-@import "~components/base/less/mixins";
+@import '~components/base/less/mixins';
+@import '~components/base/less/variables';
+@import '~components/icon/index';
 @import './playerPicker/index';
 @import './filterbar/index';
 @import './playerList/index';
-
+@import './lineup/index';
 
 .p1 {
-	/*position: absolute;
-	left: 0;
-	top: 0;
-	bottom: 0;
-	right: 0;*/
-
 	display: flex; 
 	flex-direction: column;
 	width: 100%;
@@ -19,7 +15,6 @@
 		.px2rem(margin-top, 10);
 		.px2rem(margin-bottom, 10);
 	}
-	.filterbar {}
 	.player-list {
 		flex: 1;
 		overflow-x: hidden;

@@ -19,5 +19,22 @@
 		flex: 1;
 		overflow-x: hidden;
 		overflow-y: scroll;
+		background: @color-bg-lightBlack;
+	}
+}
+
+// 自定义弹框样式
+.custom-modal {
+	.px2rem(width, 640);
+	.px2rem(height, 948);
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto !important;
+	border-radius: 0;
+	.modal-inner {
+		padding: 0;
 	}
 }

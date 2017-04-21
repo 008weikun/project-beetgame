@@ -1,19 +1,36 @@
 .lineup {
-	.px2rem(width, 640);
-	margin: 0 auto;
+	// .px2rem(width, 640);
+	// margin: 0 auto;
+	background: @color-bg-lightBlack;
+	.lineup-header {
+		position: relative;
+		width: 100%;
+		.px2rem(height, 80);
+		border-bottom: 1px solid @color-font-lightBlack;
+		.btn-close {
+			position: absolute;
+			.px2rem(right, 20);
+			top: 50%;
+			transform: translateY(-50%);
+			display: inline-block;
+			.px2rem(width, 30);
+			.px2rem(height, 30);
+			background: url('~components/ui/images/close.png') no-repeat center center;
+		}
+	}
 	.lineup-players {
 		display: flex;
 		justify-content: center;
 		flex-wrap: wrap-reverse;
 		font-size: 0;
+		.px2rem(width, 600);
 		.px2rem(padding-top, 30);
 		.px2rem(padding-bottom, 30);
-
 		margin: 0 auto;
 	}
 	.player-wrap {
 		display: inline-block;
-		.px2rem(margin-right, 50);
+		.px2rem(margin-right, 30);
 		&:nth-child(3),
 		&:last-child {
 			margin-right: 0
@@ -71,19 +88,25 @@
 
 			}
 			.player-wealth {
+				display: flex;
+				justify-content: flex-end;
+				align-items: center;
 			}
 			.player-wealth__span {
+				.px2rem(padding-left, 4);
 				color: @color-font-yellow;
 			}
 		}
 		.btg-icon-money {
-			transform: scale(.9);
+			transform: scale(.8);
 		}
 	}
 	.lineup-div {
 		overflow: hidden;
 		.px2rem(padding-top, 20);
 		.px2rem(padding-bottom, 20);
+		.px2rem(padding-left, 40);
+		.px2rem(padding-right, 40);
 		.px2rem(line-height, 50);
 		color: @color-font-white;
 		.px2px(font-size, 28);
@@ -105,20 +128,11 @@
 			transform: scale(.9);
 		}
 	}
-	.lineup-swiper {
-		.swiper-container {
-			width: 100%;
-			.px2rem(width, 666);
-			.px2rem(padding-top, 33);
-			.px2rem(padding-bottom, 33);
-			.swiper-slide {
-				.px2rem(width, 220);
-			}
-		}
-	}
 	.lineup-btns {
 		.px2rem(padding-top, 30);
 		.px2rem(padding-bottom, 30);
+		.px2rem(padding-left, 60);
+		.px2rem(padding-right, 60);
 		.px2px(font-size, 26);
 		.button {
 			color: @color-font-lightBlack;	

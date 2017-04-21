@@ -6,6 +6,8 @@ var url = require('url-lib');
 var Swiper = require('swiper/dist/js/swiper.min');
 var template = require('./index.hbs');
 var templatePlayerItem = require('./playerList/item.hbs');
+var templateLineUp = require('./lineup/index.hbs');
+var templateLineUpItem = require('./lineup/item.hbs');
 var token = require('components/base/js/token');
 var avatar = require('components/ui/images/avatar/avatar2.png');
 
@@ -139,6 +141,10 @@ function getRolePlayerId(role) {
     return null;
 }
 
+function getRoles(){
+    return roles;
+}
+
 /**
  * 设置角色的玩家id
  * @param {String} role 
@@ -168,14 +174,22 @@ function setAllRolePlayerId(data) {
  * @param {String Number} id 玩家id
  */
 function getPlayerInfo(data, role, id) {
-    var arr = data[role].slice();
+    var arr = null;
     var playerInfo = null;
-    arr.forEach(function(value){
-        if (id == value.playerid) {
-            playerInfo = value;
-            return false;
-        }
-    });
+    if (_.isArray(data[role])) {
+        arr = data[role].slice();
+        arr.forEach(function(value){
+            if (id == value.playerid) {
+                playerInfo = value;
+                return false;
+            }
+        });
+    }
+
+    if (_.isPlainObject(data[role])) {
+        playerInfo = _.merge({}, data[role]);
+    }
+
     return playerInfo;
 }
 
@@ -239,7 +253,7 @@ function getRoomInfo(data, callback) {
 }
 
 /**
- * 清洗ajax请求的返回值
+ * 清洗ajax请求的返回值，找到playerid对应的玩家信息
  * @param {Object} data 
  * @param {Number} flag
  */
@@ -257,6 +271,47 @@ function washRespData(data, flag) {
         
     }
     return obj;
+}
+
+/**
+ * 获取一键阵容信息
+ * @param {Object} data 
+ * @param {Function} callback 
+ */
+function getQuickLineUpInfo(data, callback) {
+	if (!(_.isPlainObject(data) && _.isFunction(callback))) return;
+	$.ajax({
+		type: 'GET',
+		url: '/api/fantasy/formation',
+		headers: {
+			Authorization: 'Bearer ' + token.getToken()
+		},
+		dataType: 'json',
+		data: _.merge({}, data),
+		success: function (resp, status, xhr) {
+			callback(resp, status, xhr);
+		},
+		error: function(xhr, errorType, error){
+	  		console.error(errorType, ':', error);
+	  	}
+	});
+}
+
+/**
+ * 清洗一键阵容ajax请求的数据
+ * @param {*} data 
+ */
+function washQuickLineUpRespData(data) {
+      var obj = _.merge({}, data);
+      var tmp = {};
+      if (_.isArray(obj.data)) {
+          obj.data.forEach(function (value) {
+              tmp[value.tab] = value;
+          });
+          obj.data = tmp;
+          return obj;
+      }
+      return false;
 }
 
  /**
@@ -461,7 +516,7 @@ function addOrRemoveRolePlayer(role, playerId, data) {
 
     if ( playerId != oldPlayerId) { 
         playerInfo = getPlayerInfo(data, role, playerId);
-        if (calcSalary(data) + oldPlayerPrice - playerInfo.price*1 <= 0 ) {
+        if (calcSalary(data) + oldPlayerPrice - playerInfo.price*1 < 0 ) {
             alert('薪金余额不足！')
             return;
         }
@@ -496,6 +551,7 @@ function bindEvent(data) {
 
     salary = initSalary(data);
 
+    // 清空
     root.on('click', '#J_clean', function (event) {
         if (isAllRolesPlayerIdEmpty()) {
             return;
@@ -504,14 +560,62 @@ function bindEvent(data) {
         renderAllSwiperSlides(roles, data.data);
     });
 
+    // 一键阵容
     root.on('click', '#J_quickLineUp', function (event) {
-        
+        getQuickLineUpInfo({id: params.id}, function(resp, status, xhr){
+            var newData = null;
+            var lineup  = null;
+            var roles = {};
+            if (resp.status != 200) {return;}
+            newData = washQuickLineUpRespData(resp);
+            lineup  = newData.data;
+            $.modal({
+                extraClass: 'custom-modal',
+                text: templateLineUp(newData)
+            });
+            for(var key in lineup) {
+                if (lineup.hasOwnProperty(key)) {
+                    roles[key] = lineup[key].playerid;
+                }
+            }
+            clearAllRolesPlayerId();
+            renderAllSwiperSlides(roles, lineup);
+        });
     });
 
+    $(document).on('click', '#J_lineupMore', function (event) {
+        var $this = $(this);
+        var parent = $this.parent('.lineup-btns');
+        getQuickLineUpInfo({id: params.id}, function(resp, status, xhr){
+            var newData = null;
+            var lineup  = null;
+            var roles = {};
+            if (resp.status != 200) {return;}
+            newData = washQuickLineUpRespData(resp);
+            lineup  = newData.data;
+            parent.siblings('.lineup-inner-wrap').html(templateLineUpItem(newData));
+            for(var key in lineup) {
+                if (lineup.hasOwnProperty(key)) {
+                    roles[key] = lineup[key].playerid;
+                }
+            }
+            clearAllRolesPlayerId();
+            renderAllSwiperSlides(roles, newData.data);
+        });
+    });
+
+    // 关闭弹框
+    $(document).on('click', '.btn-close', function (event) {$.closeModal();});
+
+    // 提交阵容
     root.on('click', '#J_submitLineUp', function (event) {
+    });
+
+    root.on('click', '#J_lineupSubmit', function (event) {
         
     });
 
+    // 排序
     root.on('click', '#J_filterFansvalue', function (event) {
         filter.setRoleStat(getRole(),'fan');
         updateFilterBarIcon();
@@ -530,6 +634,7 @@ function bindEvent(data) {
         renderPlayerListItem(data);
     });
 
+    // 选择队员
     root.on('click', '#J_playerList .player-choose-btn span', function (event) {
         var role = getRole();
         var $this = $(this);

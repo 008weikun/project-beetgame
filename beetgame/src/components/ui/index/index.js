@@ -15,6 +15,11 @@ Handlebars.registerHelper('formatIcon', function(value){
 	return 1 == value ? 'chip' : 'bottole';
 });
 
+Handlebars.registerHelper('encodeURIComponent', function(value){
+	return window.encodeURIComponent(value);
+});
+
+
 var currentPageNum = 1,
 	totalPageNum = null,
 	totalItemNum = null;

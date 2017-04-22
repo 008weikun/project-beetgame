@@ -1,0 +1,99 @@
+{{#each data}}
+    <div class="game">
+        <div class="card">
+            <div class="card-header no-border">{{this.starttime}}</div>
+            <div class="card-content">
+                <div class="card-content-inner">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <div class="team">
+                                <div class="team-logo">
+                                    <img src="{{this.oneteamicon}}" alt="LOGO" class="team-logo__img">
+                                </div>
+                                <div class="team-name">{{this.oneseedname}}</div>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <div class="team">
+                                <div class="team-logo">
+                                    <img src="{{this.twoteamicon}}" alt="LOGO" class="team-logo__img">
+                                </div>
+                                <div class="team-name">{{this.twoseedname}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vs-text">VS</div>
+                </div>
+            </div>
+            <div class="card-footer no-border">B03</div>
+        </div>
+        <div class="game-detail">
+            <div class="team">
+                <div class="team-logo">
+                    <img src="{{this.oneteamicon}}" alt="LOGO" class="team-logo__img">
+                </div>
+                <div class="team-inner-wrap">
+                    <div class="team-name">{{this.oneseedname}}</div>
+                    <div class="team-data">
+                        <span class="btg-icon-fan"></span>排名
+                        <span class="team-data__span">{{this.oneworldrank}}</span>
+                        <span class="btg-icon-cup"></span>最近
+                        <span class="team-data__span">{{this.onerecordresult}}</span>
+                    </div>
+                    <div class="team-members">
+                         <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                {{#each this.oneteamplayers}}
+                                            <div class="member" data-playerid="{{this.playerid}}">
+                                                <div class="member-avatar">
+                                                    <img src="{{this.avatar}}" alt="头像" class="member-avatar__img">
+                                                </div>
+                                                <div class="member-name">{{this.playername}}</div>
+                                            </div>
+                                {{/each}}
+                                    </div>
+                            </div>
+                                                            <div class="swiper-scrollbar"></div>
+
+                         </div>
+                    </div>
+                </div>
+            </div>
+           <div class="team">
+                <div class="team-logo">
+                    <img src="{{this.twoteamicon}}" alt="LOGO" class="team-logo__img">
+                </div>
+                <div class="team-inner-wrap">
+                    <div class="team-name">{{this.twoseedname}}</div>
+                    <div class="team-data">
+                        <span class="btg-icon-fan"></span>排名
+                        <span class="team-data__span">{{this.twoworldrank}}</span>
+                        <span class="btg-icon-cup"></span>最近
+                        <span class="team-data__span">{{this.tworecordresult}}</span>
+                    </div>
+                    <div class="team-members">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                {{#each this.twoteamplayers}}
+                                            <div class="member" data-playerid="{{this.playerid}}">
+                                                <div class="member-avatar">
+                                                    <img src="{{this.avatar}}" alt="头像" class="member-avatar__img">
+                                                </div>
+                                                <div class="member-name">{{this.playername}}</div>
+                                            </div>
+                                {{/each}}
+                                    </div>
+                            </div>
+                                <div class="swiper-scrollbar"></div>
+
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{else}}
+    <div class="placeholder"></div>
+{{/each}}

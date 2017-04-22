@@ -9,7 +9,7 @@ var token = require('components/base/js/token');
 var template = require('./index.hbs');
 
 var root = $('#J_content .swiper-slide').eq(1);
-var iscroll = require('iscroll');
+
 /**
  * 获取队伍数据
  * @param {Object} data 

@@ -35,7 +35,7 @@ const config = {
   },
 
   module: {
-		noParse: /(?:node_modules|bower_components)(\\|\/)(lodash|jquery|vue[\/\\])/,
+		noParse: /(?:node_modules|bower_components)(\\|\/)(lodash|jquery|vue[\/\\]|moment)/,
 
 		rules: [
       {

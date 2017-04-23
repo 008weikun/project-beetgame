@@ -95,7 +95,7 @@ function getDisplayNoneDomStyle(dom, pseudoEle) {
 // 注册事件
 function bindEvent(data) {
     var height = 0;
-    var SELECTOR_GD = '.game-detail'
+    var SELECTOR_GD = '.game-detail';
     var elements = root.find(SELECTOR_GD);
     
     if (elements.length > 0) {
@@ -107,26 +107,26 @@ function bindEvent(data) {
             var $this = $(this);
             var content = $this.siblings(SELECTOR_GD);
             elements.not(content).hide();
-
             if (content.is(':hidden')) {
                 content.height(0).show().height(height);
             } else {
                 content.height(0);
                 setTimeout(function(){content.hide();},300);
             }
-
         });
 
         // 队员的滚动效果
-     /*   elements.forEach(function(elem) {
+        elements.forEach(function(elem) {
             var $this = $(elem);
-            var swiperContainers = $this.find('.swiper-container');
             var styleCssText  = elem.style.cssText;
+            var swiperContainers = $this.find('.swiper-container');
             var prop = {
                 display: 'block',
                 position: 'absolute',
-                left: '-10000px'
+                top: '-10000px',
+                width: '100%'
             };
+            
              // 显示dom后重新计算dom的样式
             for (var key in prop) {
                 if (prop.hasOwnProperty(key)) {
@@ -135,16 +135,12 @@ function bindEvent(data) {
             }
 
             swiperContainers.forEach(function(elem){
-                (new Swiper(elem, {
-                   scrollbar: ".swiper-scrollbar",
-                direction: "horizontal",
-                slidesPerView: 'auto',
-                freeMode: true,
-              
+                ;(new Swiper(elem, {
+                    slidesPerView: 'auto',
+                    freeMode: true
                 }));
-
             });
-
+            
             // 重置样式
             if (styleCssText.length > 0) {
                 elem.style.cssText = styleCssText;
@@ -152,7 +148,7 @@ function bindEvent(data) {
                 elem.removeAttribute('style');
             }
 
-        });*/
+        });
 
 
     }

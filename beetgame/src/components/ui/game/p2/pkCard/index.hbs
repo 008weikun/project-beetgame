@@ -43,19 +43,18 @@
                     <div class="team-members">
                          <div class="swiper-container">
                             <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
                                 {{#each this.oneteamplayers}}
-                                            <div class="member" data-playerid="{{this.playerid}}">
-                                                <div class="member-avatar">
-                                                    <img src="{{this.avatar}}" alt="头像" class="member-avatar__img">
-                                                </div>
-                                                <div class="member-name">{{this.playername}}</div>
+                                    <div class="swiper-slide">
+                                        <div class="member" data-playerid="{{this.playerid}}">
+                                            <div class="member-avatar">
+                                                <img src="{{this.avatar}}" alt="头像" class="member-avatar__img" 
+                                                onerror='this.src="@include("../../../images/avatar/avatar1.png")"'>
                                             </div>
-                                {{/each}}
+                                            <div class="member-name">{{this.playername}}</div>
+                                        </div>
                                     </div>
+                                {{/each}}
                             </div>
-                                                            <div class="swiper-scrollbar"></div>
-
                          </div>
                     </div>
                 </div>
@@ -75,19 +74,18 @@
                     <div class="team-members">
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
                                 {{#each this.twoteamplayers}}
-                                            <div class="member" data-playerid="{{this.playerid}}">
-                                                <div class="member-avatar">
-                                                    <img src="{{this.avatar}}" alt="头像" class="member-avatar__img">
-                                                </div>
-                                                <div class="member-name">{{this.playername}}</div>
+                                    <div class="swiper-slide">
+                                        <div class="member" data-playerid="{{this.playerid}}">
+                                            <div class="member-avatar">
+                                                <img src="{{this.avatar}}" alt="头像" class="member-avatar__img" 
+                                                onerror='this.src="@include("../../../images/avatar/avatar1.png")"'>
                                             </div>
-                                {{/each}}
+                                            <div class="member-name">{{this.playername}}</div>
+                                        </div>
                                     </div>
+                                {{/each}}
                             </div>
-                                <div class="swiper-scrollbar"></div>
-
                          </div>
                     </div>
                 </div>

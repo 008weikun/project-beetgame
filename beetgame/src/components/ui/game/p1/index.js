@@ -8,6 +8,7 @@ var template = require('./index.hbs');
 var templatePlayerItem = require('./playerList/item.hbs');
 var templateLineUp = require('./lineup/index.hbs');
 var templateLineUpItem = require('./lineup/item.hbs');
+var templateSubmitConfirm = require('./submitConfirm/index.hbs');
 var token = require('components/base/js/token');
 var avatar = require('components/ui/images/avatar/avatar2.png');
 
@@ -83,14 +84,14 @@ var roles = {
 };
 
 /**
- * 获取玩家角色
+ * 获取当前玩家角色
  */
 function getRole() {
     return role;
 }
 
 /**
- * 设置玩家角色
+ * 设置当前玩家角色
  * @param {String} value 
  */
 function setRole(value) {
@@ -121,9 +122,24 @@ function clearAllRolesPlayerId() {
     }
 }
 
+/**
+ * 判断所有角色的玩家id是否全部为空
+ */
 function isAllRolesPlayerIdEmpty() {
     for (var key in roles) {
         if (roles.hasOwnProperty(key) && !!roles[key]) {
+            return false;
+        };
+    }
+    return true;
+}
+
+/**
+ * 判断所有角色的玩家id是否都被赋值
+ */
+function isAllRolesPlayerIdFull() {
+     for (var key in roles) {
+        if (roles.hasOwnProperty(key) && !!!roles[key]) {
             return false;
         };
     }
@@ -139,10 +155,6 @@ function getRolePlayerId(role) {
         return roles[role];
     }
     return null;
-}
-
-function getRoles(){
-    return roles;
 }
 
 /**
@@ -229,6 +241,40 @@ function calcSalary(data) {
 }
 
 /**
+ * 计算所有角色的fan值得总值
+ */
+function calcFanValue(data) {
+    var value = 0;
+    for (var key in roles) {
+        if (roles.hasOwnProperty(key) && !!roles[key]) {
+            value += getPlayerInfo(data, key, roles[key]).fan;
+        };
+    }
+    return value.toFixed(2);
+}
+
+/**
+ * 生成请求的参数对象
+ * @return {Object}  
+ */
+function generateRequestParamsObject() {
+    var obj = {
+        userplayers: [],
+        client: 'wx'
+    };
+    for (var key in roles) {
+        if (roles.hasOwnProperty(key) && !!roles[key]) {
+           obj.userplayers.push({
+               playerid: roles[key],
+               position: roleDict[key],
+               roomid: params.id
+           });
+        };
+    }
+    return obj;
+}
+
+/**
  * 获取相关的房间信息
  * @param {Object} data 
  * @param {Function} callback 
@@ -312,6 +358,30 @@ function washQuickLineUpRespData(data) {
           return obj;
       }
       return false;
+}
+
+/**
+ * 提交阵容
+ * @param {*} data 
+ * @param {*} callback 
+ */
+function postLineUp(data, callback) {
+	if (!(_.isPlainObject(data) && _.isFunction(callback))) return;
+	$.ajax({
+		type: 'POST',
+		url: '/api/fantasy/userplayers',
+		headers: {
+			Authorization: 'Bearer ' + token.getToken()
+		},
+		dataType: 'json',
+		data: _.merge({}, data),
+		success: function (resp, status, xhr) {
+			callback(resp, status, xhr);
+		},
+		error: function(xhr, errorType, error){
+	  		console.error(errorType, ':', error);
+	  	}
+	});
 }
 
  /**
@@ -517,7 +587,7 @@ function addOrRemoveRolePlayer(role, playerId, data) {
     if ( playerId != oldPlayerId) { 
         playerInfo = getPlayerInfo(data, role, playerId);
         if (calcSalary(data) + oldPlayerPrice - playerInfo.price*1 < 0 ) {
-            alert('薪金余额不足！')
+            $.alert('薪金余额不足！')
             return;
         }
         setRolePlayerId(role, playerId);
@@ -535,6 +605,49 @@ function addOrRemoveRolePlayer(role, playerId, data) {
         }
     }
     $('#J_purse').html(calcSalary(data));
+}
+
+/**
+ * 提交阵容询问弹框
+ */
+function submitConfirm(data) {
+    var flag = isAllRolesPlayerIdFull();
+    if (!flag) {
+        $.alert('玩家人数不够！');
+        return;
+    }
+    $.modal({
+        extraClass: 'custom-modal1',
+        text: templateSubmitConfirm({
+                    total: calcFanValue(data),
+                    fee: params.jcost
+                })
+    });
+}
+
+/**
+ * 提交阵容
+ */
+function submit() {
+    var flag = isAllRolesPlayerIdFull();
+    var data = null;
+
+    if (!flag) {
+        $.alert('玩家人数不够！');
+        return;
+    }
+    
+    data = generateRequestParamsObject();
+    data.userplayers =  JSON.stringify(data.userplayers);
+
+    postLineUp(data, function(resp, status, xhr){
+        var status = resp.status;
+        if (200 !== status) {
+            $.closeModal(); $.alert(resp.errorMsg);
+            return;
+        }
+        // 页面跳转        
+    });
 }
 
 /**
@@ -600,20 +713,30 @@ function bindEvent(data) {
                 }
             }
             clearAllRolesPlayerId();
-            renderAllSwiperSlides(roles, newData.data);
+            renderAllSwiperSlides(roles, lineup);
         });
     });
 
     // 关闭弹框
-    $(document).on('click', '.btn-close', function (event) {$.closeModal();});
+    ['.btn-close', '#J_cancel'].forEach(function(selector){
+        $(document).on('click', selector, function (event) {$.closeModal();});
+    });
 
     // 提交阵容
     root.on('click', '#J_submitLineUp', function (event) {
+        submitConfirm(data.data);
     });
 
-    root.on('click', '#J_lineupSubmit', function (event) {
-        
+    $(document).on('click', '#J_lineupSubmit', function (event) {
+        if ($('.custom-modal').length > 0) {
+            $.closeModal('.custom-modal');
+        }
+        submitConfirm(data.data);
     });
+
+      $(document).on('click', '#J_submit', function (event) {
+        submit();
+     });
 
     // 排序
     root.on('click', '#J_filterFansvalue', function (event) {

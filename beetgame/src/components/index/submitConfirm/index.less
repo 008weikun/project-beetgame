@@ -1,0 +1,56 @@
+@import '~components/base/less/mixins';
+@import '~components/base/less/variables';
+
+.submit-confirm {
+    color: @color-font-white;
+    .px2px(font-size, 24);
+    text-align: center;
+    .tips {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .px2rem(margin-top, 20);
+        .px2rem(margin-bottom, 20);
+        .card-icon-t {
+            transform: scale(.8);
+            .px2rem(margin-right, 5);
+        }
+    }
+    .total {
+        .px2rem(margin-top, 20);
+        .px2rem(margin-bottom, 20);
+        color: @color-font-gray;
+        span {
+            .px2rem(margin-left, 8);
+        }
+    }
+    .fee {
+        .px2rem(margin-top, 20);
+        .px2rem(margin-bottom, 20);
+        color: @color-font-gray;
+        span {
+            color: @color-font-white;
+            .px2rem(margin-left, 10);
+        }
+        .btg-icon-chip {
+             transform: scale(.8);
+        }
+    }
+    .btns {
+        .px2rem(padding-top, 30);
+		.px2rem(padding-bottom, 30);
+		.px2rem(padding-left, 60);
+		.px2rem(padding-right, 60);
+		.px2px(font-size, 26);
+		.button {
+			color: @color-font-lightBlack;	
+			.px2rem(height, 50);
+			.px2rem(line-height, 50);
+    		border-color: @color-font-yellow;
+		}
+		.button-fill {
+			background:  @color-font-yellow;
+		}
+    }
+
+}

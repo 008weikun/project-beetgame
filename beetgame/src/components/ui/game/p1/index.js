@@ -646,7 +646,9 @@ function submit() {
             $.closeModal(); $.alert(resp.errorMsg);
             return;
         }
-        // 页面跳转        
+        // 页面跳转 
+        window.location.href = '/submitSucess.html?id=' + params.id + 
+            '&isJoined=1&msg=' + encodeURIComponent(resp.msg);     
     });
 }
 

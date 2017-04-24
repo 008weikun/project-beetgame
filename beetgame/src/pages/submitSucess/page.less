@@ -1,0 +1,160 @@
+@import '~components/base/less/mixins';
+@import '~components/base/less/variables';
+@import '~components/ui/icon/index';
+@import '~components/index/icon/index';
+
+
+.content {
+    background: @color-bg-lightBlack;
+}
+.tips {
+    .px2rem(line-height, 40);
+    .px2rem(padding-top, 60);
+    .px2rem(padding-bottom, 40);
+    text-align: center;
+    .tips-head {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .px2rem(padding-bottom, 40);
+        color: @color-font-white;
+        .px2px(font-size, 28);
+        span {
+            .px2rem(margin-right, 20);
+        }
+    }
+    .tips-content {
+        color: @color-font-yellow;
+        .px2px(font-size, 26);
+    }
+}
+.lineup {
+    border-top: 1px solid @color-font-lightBlack;
+	background: @color-bg-lightBlack;
+	.lineup-players {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap-reverse;
+		font-size: 0;
+		.px2rem(width, 640);
+		.px2rem(padding-top, 30);
+		.px2rem(padding-bottom, 30);
+		margin: 0 auto;
+	}
+	.player-wrap {
+		display: inline-block;
+		.px2rem(margin-right, 50);
+		&:nth-child(3),
+		&:last-child {
+			margin-right: 0
+		}
+		&:nth-child(4),
+		&:last-child {
+		.px2rem(margin-bottom, 30);
+		}
+		.player-card {
+			position: relative;
+			border: 1px solid @color-font-yellow;
+			// box-shadow: 0 0 10px #f7db00;
+			.px2rem(width, 180);
+			.px2rem(height, 213);
+			background: #262626;
+			.player-name {
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				.px2rem(height, 50);
+				.px2rem(line-height, 50);			
+				color: @color-font-white;
+				.px2px(font-size, 24 );
+				background: rgba(0,0,0,.5);
+				text-align: center;
+			}
+			.player-avatar {
+				overflow: hidden;
+				width: 100%;
+				height: 100%;
+				.player-avatar__img {
+					width: 100%;
+					height: auto;
+					vertical-align: top;
+				}
+			}
+		}
+		.player-data {
+			.px2rem(padding-top, 6);
+			.px2rem(padding-bottom, 6);
+			color: @color-font-white;
+			.px2px(font-size, 24);
+		}
+		.player-data-chart {
+			position: absolute;
+			.px2rem(width, 64);
+			.px2rem(height, 64);
+		}
+		.player-role-and-wealth	{
+			.px2rem(line-height, 32);
+			.px2rem(padding-left, 64);
+			text-align: right;
+			.player-role {
+
+			}
+			.player-wealth {
+				display: flex;
+				justify-content: flex-end;
+				align-items: center;
+			}
+			.player-wealth__span {
+				.px2rem(padding-left, 4);
+				color: @color-font-yellow;
+			}
+		}
+		.btg-icon-money {
+			transform: scale(.8);
+		}
+	}
+	.lineup-div {
+		overflow: hidden;
+		.px2rem(padding-top, 20);
+		.px2rem(padding-bottom, 20);
+		.px2rem(padding-left, 40);
+		.px2rem(padding-right, 40);
+		.px2rem(line-height, 50);
+		color: @color-font-white;
+		.px2px(font-size, 28);
+		.lineup-div__span {
+			// .px2rem(margin-left, 12);
+			color: #fac913;
+            .px2px(font-size, 24);
+		}
+		.button {
+			.px2rem(height, 50);
+			.px2rem(line-height, 50);
+			color: @color-font-gray;
+			border-color: currentColor;
+			.px2px(font-size, 24);
+			display: flex;
+			align-items: center;
+		}
+		.btg-icon-del {
+			.px2rem(margin-right, 8);
+			transform: scale(.9);
+		}
+	}
+	.lineup-btns {
+		.px2rem(padding-top, 30);
+		.px2rem(padding-bottom, 30);
+		.px2rem(padding-left, 60);
+		.px2rem(padding-right, 60);
+		.px2px(font-size, 26);
+        text-align: center;
+		.button {
+            display: inline-block;
+			color: @color-font-yellow;	
+			.px2rem(height, 50);
+			.px2rem(line-height, 50);
+    		border-color: @color-font-yellow;
+		}
+	}
+}

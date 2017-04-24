@@ -1,0 +1,38 @@
+<div class="tips">
+    <div class="tips-head"><span class="card-icon-ok"></span>参与成功</div>
+    <div class="tips-content">{{customMsg}} </div>
+</div>
+<div class="lineup">
+	<div class="lineup-div clearfix">
+		<div class="pull-left">我的战队阵容<span class="lineup-div__span">（场均总值{{totalFanValue}}）</span></div>
+		<div class="pull-right">
+			<!--场均总值<span class="lineup-div__span">90</span>-->
+		</div>
+	</div>
+	<div class="lineup-players">
+        {{#each choosen as |value key|}}
+            <div class="player-wrap">
+                <div class="player-card" data-role="{{key}}" data-playerid="{{value.playerid}}">
+                    <div class="player-name">{{value.name}}</div>
+                    <div class="player-avatar">
+                        <img src="{{value.avatar}}" alt="头像" class="player-avatar__img" 
+                            onerror='this.src="@include("../../components/ui/images/avatar/avatar1.png")"'>
+                    </div>
+                </div>
+                <div class="player-data clearfix">
+                    <div class="player-data-chart">{{value.fan}}</div>
+                    <div class="player-role-and-wealth">
+                        <div class="player-role">{{value.meta}}</div>
+                        <div class="player-wealth">
+                            <span class="btg-icon-money"></span>
+                            <span class="player-wealth__span">{{value.price}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+	</div>
+	<div class="lineup-btns clearfix">
+		<a href="javascript:;" class="button">返回大厅</a>
+	</div>
+</div>

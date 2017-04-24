@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+    <script>
+        ;(function(){
+            var title = location.href.match(/(?:(?:^|\?|&)?name=)([^&]*)(?:&|$)?/);
+            title = title && title[1]|| '范特西';
+            if ( 'string' == typeof title && title.length > 0 ) {
+                document.write('<title>' + decodeURI(title) + '<\/title>');
+            }
+        })();
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="application-name" content="">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    ${require('~components/base/screenAdaptationScript.html')}
+    <script>
+        window.config = {
+            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0OTI2NTgwNDgsIm5iZiI6MTQ5MjY1ODA0OCwiZXhwIjoxNDkzMjYyODQ4LCJleHB0ZW1wIjoxNDkyNjYxNjQ4LCJ1aWQiOjF9.9B2lMC8h2Ma9rzYcaj9cGfJjFR1rMVKmyaTacPS2834'
+        };
+    </script>
+</head>
+<body>
+<div class="page-group">
+    <div class="page page-current">
+      <div class="content" id="J_view">
+       ${require('~components/ui/tab/index.html')}
+      </div>
+    </div>
+</div>
+</body>
+</html>

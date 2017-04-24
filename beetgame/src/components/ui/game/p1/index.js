@@ -217,7 +217,7 @@ function initSalary(data) {
         if (!roles.hasOwnProperty(key)) continue;
         tmp = getPlayerInfo(players, key, roles[key]);
         if (tmp) {
-            salary += tmp.price*1;
+            salary -= tmp.price*1;
         }
     }
     return salary;
@@ -660,11 +660,11 @@ function bindEvent(data) {
 
     var swiper = bootSwiper();
     
-    if (1 == params.isJoined) {
-        setAllRolePlayerId(data.choosen);
-    }
+    // if (1 == params.isJoined) {
+    //     setAllRolePlayerId(data.choosen);
+    // }
 
-    salary = initSalary(data);
+    // salary = initSalary(data);
 
     // 清空
     root.on('click', '#J_clean', function (event) {
@@ -778,6 +778,12 @@ function render(){
         getRoomInfo({roomid: params.id}, function(resp, status, xhr) {
             if (200 !== resp.status) return;
             resp = washRespData(resp, params.isJoined);
+             if (1 == params.isJoined) {
+                setAllRolePlayerId(resp.choosen);
+            }
+
+            salary = resp.money;
+            resp.money = initSalary(resp);
             root.append(template(resp));
             bindEvent(resp);
         });

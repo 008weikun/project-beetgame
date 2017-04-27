@@ -13,7 +13,6 @@ var data = {
 function render() {
     root.append(template(data));
 }
-
 module.exports = {
     render: render
 };

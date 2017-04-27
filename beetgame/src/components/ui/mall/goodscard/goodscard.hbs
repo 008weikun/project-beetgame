@@ -1,0 +1,16 @@
+{{#if data}}
+    {{#each data}}
+        <a href="/submitExchange.html?pic={{this.goods_img}}&id={{this.id}}&name={{this.name}}
+      &price={{this.goods_integral}}&stocks={{this.stocks}}&type={{this.goods_type}}" style="color: inherit">
+            <div class="goods-card" data-goods-type="{{this.goods_type}}" id="{{this.id}}">
+                <div class="goods-pic" style="background-image:url({{this.goods_img}})"></div>
+                <div class="goods-dec">{{this.name}}</div>
+                <div class="goods-worth">
+                    <span class="cost">{{this.goods_integral}}</span>
+                    <span class="awarded btg-icon-bottole"></span>
+                    <span class="exchange">兑换</span>
+                </div>
+            </div>
+        </a>
+    {{/each}}
+{{/if}}

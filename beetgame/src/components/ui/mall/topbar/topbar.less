@@ -1,0 +1,39 @@
+@import '~components/base/less/mixins';
+.mytopprice{
+  position: relative;
+  width:100%;
+  box-sizing: border-box;
+  .px2rem(height,75);
+  .px2rem(padding-left,45);
+  .px2rem(padding-right,45);
+  .px2rem(padding-top,25);
+  .px2rem(padding-bottom,25);
+  display: flex;
+  justify-content: space-between;
+  z-index:5;
+  background-color: #f2f2f2;
+  .remaining{
+    .px2px(font-size,26);
+    color:#4d4d4d;
+    span:nth-of-type(1){
+      vertical-align: middle;
+    }
+    .mycast{
+      .px2rem(margin-left,10);
+      vertical-align: middle;
+    }
+    .thumbnail{
+      vertical-align: middle;
+      .px2rem(margin-left,10);
+    }
+  }
+  .record{
+    .px2rem(width,115);
+    .px2rem(height,38);
+    background: url("./record_07.png") no-repeat;
+    background-size: 100%;
+  }
+}
+
+
+

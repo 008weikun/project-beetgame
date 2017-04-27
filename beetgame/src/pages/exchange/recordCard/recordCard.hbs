@@ -1,0 +1,27 @@
+{{#if data}}
+   {{#each data}}
+<div class="recordcard">
+    <div class="goods-pic" style="background-image:url({{this.goods_img}})"></div>
+    <div class="record-description">
+        <div class="goodstxt record-items">
+            <div class="exchange-dec">{{this.goods_name}}</div>
+            <div>
+                <span class="goods-cost">{{this.goods_integral}}</span>
+                <span class="btg-icon-bottole"></span>
+            </div>
+        </div>
+        {{#if this.logistics_num}}
+        <div class="sendstatus record-items">
+            <div class="status">已发货</div>
+            <div class="express-type">{{this.logistics_name}}</div>
+            <div class="express-num">{{this.logistics_num}}</div>
+        </div>
+        {{else}}
+            <div class="sendstatus record-items">
+                <div class="status">未发货</div>
+            </div>
+        {{/if}}
+    </div>
+</div>
+   {{/each}}
+{{/if}}

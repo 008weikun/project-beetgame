@@ -15,16 +15,26 @@
     ${require('~components/base/screenAdaptationScript.html')}
     <script>
         window.config = {
-            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0OTI0MjIwNDMsIm5iZiI6MTQ5MjQyMjA0MywiZXhwIjoxNDkzMDI2ODQzLCJleHB0ZW1wIjoxNDkyNDI1NjQzLCJ1aWQiOjE3N30.GOFKAiHzgfNtQTl_PQuhPf9j6ro4WJT65vqsSDwzLDI'
+            token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0OTMxOTY5NTksIm5iZiI6MTQ5MzE5Njk1OSwiZXhwIjoxNDkzODAxNzU5LCJleHB0ZW1wIjoxNDkzMjAwNTU5LCJ1aWQiOjF9.C5nsNGqJCQM9TH3Vr0igyLkzr4791G1UdvHuGwamAnw'
         };
     </script>
 </head>
 <body>
 <div class="page-group">
-    <div class="page page-current">
+    <div class="page page-current" id="routers-index">
         ${require('~components/ui/header/index.html')}
         ${require('~components/ui/nav/index.html')}
         <div id="J_view"></div>
+    </div>
+    <div class="page" id="routers-mall">
+        ${require('~components/ui/header/index.html')}
+        ${require('~components/ui/nav/index.html')}
+      <div id="goods_view"></div>
+    </div>
+    <div class="page" id="routers-rank">
+      ${require('~components/ui/header/index.html')}
+      ${require('~components/ui/nav/index.html')}
+      <div id="rank_view"></div>
     </div>
 </div>
 </body>

@@ -15,25 +15,26 @@
   ${require('~components/base/screenAdaptationScript.html')}
   <script>
     window.config = {
-      token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0OTMxOTEwNDcsIm5iZiI6MTQ5MzE5MTA0NywiZXhwIjoxNDkzNzk1ODQ3LCJleHB0ZW1wIjoxNDkzMTk0NjQ3LCJ1aWQiOjF9.PeWBtbW7QkiB0fsFEr0HkR4OgIoJlSaWnqY8jY0wrQ4'
+      token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0OTI0MjIwNDMsIm5iZiI6MTQ5MjQyMjA0MywiZXhwIjoxNDkzMDI2ODQzLCJleHB0ZW1wIjoxNDkyNDI1NjQzLCJ1aWQiOjE3N30.GOFKAiHzgfNtQTl_PQuhPf9j6ro4WJT65vqsSDwzLDI'
     };
   </script>
-
 </head>
 <body>
-<!--<div class="page-group">-->
+<div class="page-group">
   <div class="page page-current">
-    <header class="bar">
-      <h1 class="exchange-title title">兑换</h1>
-    </header>
-    <div class="content">
-<<<<<<< HEAD
-      <section class="exchange-content"></section>
-=======
-      ${require('./formInfo/formInfo.html')}
->>>>>>> f05767b348e10504d238a00459d60d6e5a76b2de
+    <div class="record-title">兑换记录</div>
+    <div class="record-content">
+       <div  class="content infinite-scroll infinite-scroll-bottom" data-distance="100">
+          <div class="list-wapper">
+
+          </div>
+           <!--加载提示符 -->
+          <div class="infinite-scroll-preloader">
+           <div class="preloader"></div>
+          </div>
+       </div>
     </div>
   </div>
-<!--</div>-->
+  </div>
 </body>
 </html>

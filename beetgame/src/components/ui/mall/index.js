@@ -30,7 +30,11 @@ function getGoodsList(sort,page,goodsType,callback) {
       callback(resp);
     },
     error: function(xhr, errorType, error){
+<<<<<<< HEAD
       //console.error(errorType, ':', error);
+=======
+      console.error(errorType, ':', error);
+>>>>>>> f05767b348e10504d238a00459d60d6e5a76b2de
     }
   });
 }

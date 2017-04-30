@@ -76,10 +76,10 @@ var filter = ({
 }).init();
 
 var roles = {
-    'up': null, 
+    'up': null,
     'adc': null,
-    'mid': null, 
-    'wild': null, 
+    'mid': null,
+    'wild': null,
     'assis': null
 };
 
@@ -92,18 +92,18 @@ function getRole() {
 
 /**
  * 设置当前玩家角色
- * @param {String} value 
+ * @param {String} value
  */
 function setRole(value) {
     if (roleDict.hasOwnProperty(value)) {
         role = value;
         return role;
-    } 
+    }
 }
 
 /**
  * 清除角色的玩家id
- * @param {String} role 
+ * @param {String} role
  */
 function clearRolePlayerId(role){
     if ( roles.hasOwnProperty(role) ) {
@@ -148,7 +148,7 @@ function isAllRolesPlayerIdFull() {
 
 /**
  * 获取角色的玩家id
- * @param {String} role 
+ * @param {String} role
  */
 function getRolePlayerId(role) {
   if ( roles.hasOwnProperty(role) ) {
@@ -159,8 +159,8 @@ function getRolePlayerId(role) {
 
 /**
  * 设置角色的玩家id
- * @param {String} role 
- * @param {String Number} id 
+ * @param {String} role
+ * @param {String Number} id
  */
 function setRolePlayerId(role, id) {
      if ( roles.hasOwnProperty(role) ) {
@@ -170,7 +170,7 @@ function setRolePlayerId(role, id) {
 
 /**
  * 设置所有角色的玩家id
- * @param {Object} data 
+ * @param {Object} data
  */
 function setAllRolePlayerId(data) {
     for (var key in data) {
@@ -255,7 +255,7 @@ function calcFanValue(data) {
 
 /**
  * 生成请求的参数对象
- * @return {Object}  
+ * @return {Object}
  */
 function generateRequestParamsObject() {
     var obj = {
@@ -276,8 +276,8 @@ function generateRequestParamsObject() {
 
 /**
  * 获取相关的房间信息
- * @param {Object} data 
- * @param {Function} callback 
+ * @param {Object} data
+ * @param {Function} callback
  */
 function getRoomInfo(data, callback) {
 	if (!(_.isPlainObject(data) && _.isFunction(callback))) return;
@@ -287,7 +287,7 @@ function getRoomInfo(data, callback) {
 		headers: {
 			Authorization: 'Bearer ' + token.getToken()
 		},
-		dataType: 'json',
+    dataType: 'json',
 		data: _.merge({}, data),
 		success: function (resp, status, xhr) {
 			callback(resp, status, xhr);
@@ -300,7 +300,7 @@ function getRoomInfo(data, callback) {
 
 /**
  * 清洗ajax请求的返回值，找到playerid对应的玩家信息
- * @param {Object} data 
+ * @param {Object} data
  * @param {Number} flag
  */
 function washRespData(data, flag) {
@@ -314,15 +314,15 @@ function washRespData(data, flag) {
             });
         });
     } else {
-        
+
     }
     return obj;
 }
 
 /**
  * 获取一键阵容信息
- * @param {Object} data 
- * @param {Function} callback 
+ * @param {Object} data
+ * @param {Function} callback
  */
 function getQuickLineUpInfo(data, callback) {
 	if (!(_.isPlainObject(data) && _.isFunction(callback))) return;
@@ -345,7 +345,7 @@ function getQuickLineUpInfo(data, callback) {
 
 /**
  * 清洗一键阵容ajax请求的数据
- * @param {*} data 
+ * @param {*} data
  */
 function washQuickLineUpRespData(data) {
       var obj = _.merge({}, data);
@@ -362,8 +362,8 @@ function washQuickLineUpRespData(data) {
 
 /**
  * 提交阵容
- * @param {*} data 
- * @param {*} callback 
+ * @param {*} data
+ * @param {*} callback
  */
 function postLineUp(data, callback) {
 	if (!(_.isPlainObject(data) && _.isFunction(callback))) return;
@@ -405,10 +405,10 @@ function hackSwiper(swiper) {
 
 /**
  * 设置过滤条左侧玩家角色的名称
- */            
+ */
 function setFilterBarPlayerRoleName() {
-    var role = getRole();
-    root.find('#J_role').attr('data-role', role).html(roleDict[role]);
+  var role = getRole();
+  root.find('#J_role').attr('data-role', role).html(roleDict[role]);
 }
 /**
  * 玩家列表的联动效果
@@ -422,8 +422,8 @@ function togglePlayerList() {
 
 /**
  * 玩家列表本地排序，可节省服务器资源
- * @param {Object} data 
- * @param {String} key 
+ * @param {Object} data
+ * @param {String} key
  * @param {Number} type 0 默认排序 1 升序 2 降序
  */
 function sort(data, key, type) {
@@ -435,10 +435,10 @@ function sort(data, key, type) {
         return arr.sort(function (prev, next) {
             if ( parseFloat(prev[key]) > parseFloat(next[key]) ) {
                 return 1;
-            } 
+            }
             if ( parseFloat(prev[key]) < parseFloat(next[key]) ) {
                 return -1;
-            } 
+            }
             return 0;
         });
     }
@@ -471,7 +471,7 @@ function updateFilterBarIcon() {
 
 /**
  * 渲染排序后的玩家列表
- * @param {*} data 
+ * @param {*} data
  */
 function renderPlayerListItem(data) {
     var role = getRole();
@@ -485,7 +485,7 @@ function renderPlayerListItem(data) {
         newData.choosen[role] = {playerid:null};
     }
     newData.data[role] = sort(dataList[role], stat.field, stat.order);
-    root.find('#J_playerList').find('[data-role="'+ role + '"]').html(templatePlayerItem(newData));    
+    root.find('#J_playerList').find('[data-role="'+ role + '"]').html(templatePlayerItem(newData));
 }
 
 /**
@@ -498,7 +498,7 @@ function bootSwiper() {
         slideToClickedSlide: true,
         centeredSlides: true,
         loop: true,
-        slidesPerView: "auto", 
+        slidesPerView: "auto",
         loopedSlides: 5,
         // observer:true,
         effect: "coverflow",
@@ -517,13 +517,13 @@ function bootSwiper() {
         onSetTranslate: function(swiper) {
             hackSwiper(swiper);
             timer && clearTimeout(timer);
-            timer = setTimeout(function() { 
+            timer = setTimeout(function() {
                 setFilterBarPlayerRoleName();
                 togglePlayerList();
                 updateFilterBarIcon();
             }, 100);
         },
-    }); 
+    });
     return playerPickerSwiper;
 }
 
@@ -538,7 +538,7 @@ function renderSwiperSlide(role, playerInfo) {
     var slides = swiperContainer.find('[data-role="' + role +'"]');
     if (!playerId) {
         slides.find('.player-avatar img').attr('src', avatar);
-        slides.find('.player-name').html('选择队员');            
+        slides.find('.player-name').html('选择队员');
         return;
     }
     slides.find('.player-avatar img').attr('src', playerInfo.avatar).
@@ -562,7 +562,7 @@ function renderAllSwiperSlides(roles, data) {
 }
 
 /**
- * 
+ *
  * @param {*} role 角色
  * @param {*} playerId 玩家id
  * @param {*} data 玩家数据
@@ -584,7 +584,7 @@ function addOrRemoveRolePlayer(role, playerId, data) {
     var playerInfo  = null;
 
 
-    if ( playerId != oldPlayerId) { 
+    if ( playerId != oldPlayerId) {
         playerInfo = getPlayerInfo(data, role, playerId);
         if (calcSalary(data) + oldPlayerPrice - playerInfo.price*1 < 0 ) {
             $.alert('薪金余额不足！')
@@ -636,7 +636,7 @@ function submit() {
         $.alert('玩家人数不够！');
         return;
     }
-    
+
     data = generateRequestParamsObject();
     data.userplayers =  JSON.stringify(data.userplayers);
 
@@ -646,9 +646,9 @@ function submit() {
             $.closeModal(); $.alert(resp.errorMsg);
             return;
         }
-        // 页面跳转 
-        window.location.href = '/submitSucess.html?id=' + params.id + 
-            '&isJoined=1&msg=' + encodeURIComponent(resp.msg);     
+        // 页面跳转
+        window.location.href = '/submitSucess.html?id=' + params.id +
+            '&isJoined=1&msg=' + encodeURIComponent(resp.msg);
     });
 }
 
@@ -659,7 +659,7 @@ function submit() {
 function bindEvent(data) {
 
     var swiper = bootSwiper();
-    
+
     // if (1 == params.isJoined) {
     //     setAllRolePlayerId(data.choosen);
     // }

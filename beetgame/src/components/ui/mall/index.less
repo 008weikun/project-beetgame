@@ -1,0 +1,65 @@
+@import '~components/base/less/mixins';
+@import './topbar/topbar';
+@import './sortbar/sort';
+.goods-list{
+  position: absolute;
+  .px2rem(bottom,0);
+  .px2rem(top,160);
+  .px2rem(left,0);
+  .px2rem(right,0);
+  overflow: hidden;
+  background-color: #f2f2f2;
+  .container-wrapper{
+     box-sizing: border-box;
+    .px2rem(padding-left,20);
+    .px2rem(padding-right,20);
+  }
+  .goods-card{
+     .px2rem(width,350);
+     .px2rem(height,354);
+     .px2rem(margin-bottom,10);
+     background-color:#fff;
+     position: relative;
+     float: left;
+     box-shadow: 0px 2px 20px #999999;
+    .goods-pic{
+      width:100%;
+      .px2rem(height,236);
+      background-size:100%;
+    }
+    .goods-dec{
+       .px2px(font-size,28);
+       overflow: hidden;
+       text-overflow: ellipsis;
+       white-space: nowrap;
+       .px2rem(margin-top,20);
+       .px2rem(margin-left,20);
+    }
+    .cost{
+       .px2px(font-size,24);
+       .px2rem(margin-top,20);
+       .px2rem(margin-left,20);
+    }
+    .awarded{
+      vertical-align: middle;
+    }
+    .exchange{
+       position: absolute;
+      .px2rem(width,70);
+      .px2rem(bottom,10);
+      .px2rem(right,10);
+      .px2rem(height,38);
+      .px2rem(line-height,38);
+      .px2px(font-size,28);
+      background-color: #f7db00;
+      text-align: center;
+      border-radius: 5px;
+    }
+  }
+  a:nth-of-type(even) .goods-card{
+    .px2rem(margin-left,10);
+  }
+}
+
+
+

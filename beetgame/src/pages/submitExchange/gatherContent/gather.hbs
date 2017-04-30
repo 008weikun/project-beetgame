@@ -1,0 +1,39 @@
+<section class="gather">
+    <div class="gather-title">收货信息</div>
+    <div class="gather-content">
+        <div class="gather-items_person">
+            <span>收货人</span>
+            <div class="inp-txt">
+                <input type="text" id="user-name" value="{{address.name}}"/>
+            </div>
+        </div>
+        <div class="gather-items_person">
+            <span>联系电话</span>
+            <div class="inp-txt">
+                <input type="text" id="user-phone" value="{{address.phone}}"/>
+            </div>
+        </div>
+        {{#if type}}
+            <div class="gather-items_person">
+                <span class="recharge-info">账号信息</span>
+                <div class="inp-txt">
+                    <input type="text" class="recharge-txt" placeholder="请填写充值信息"/>
+                </div>
+            </div>
+        {{else}}
+            <div class="gather-items_person">
+                <span class="recharge-info">所在地区</span>
+                <div class="inp-txt">
+                    <input type="text" class="user-area" id="city-picker" value="{{address.addressDetails}}"/>
+                </div>
+            </div>
+            <div class="gather-items_person">
+                <span class="details">详细地址</span>
+                <div class="inp-txt">
+                    <textarea id="user-details">{{address.summarry}}</textarea>
+                </div>
+            </div>
+        {{/if}}
+    </div>
+    <div class="subbtn">确认兑换</div>
+</section>

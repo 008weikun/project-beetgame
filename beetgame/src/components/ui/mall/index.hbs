@@ -1,0 +1,20 @@
+@require('./sortbar/sort.hbs')
+@require('./topbar/topbar.hbs')
+<div class="goods-list">
+    <div class="content infinite-scroll infinite-scroll-bottom" data-distance="100">
+        <!-- 默认的下拉刷新层 -->
+        <!--<div class="pull-to-refresh-layer">-->
+            <!--<div class="preloader"></div>-->
+            <!--<div class="pull-to-refresh-arrow"></div>-->
+        <!--</div>-->
+
+        <div class="container-wrapper list-container">
+            @require('./goodscard/goodscard.hbs')
+        </div>
+        <!-- 加载提示符 -->
+        <div class="infinite-scroll-preloader">
+            <div class="preloader"></div>
+        </div>
+    </div>
+</div>
+</div>

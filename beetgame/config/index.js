@@ -24,7 +24,7 @@ module.exports = {
     contentBase: path.resolve(projectRoot, 'src'),
     proxy: {
       '/api': {
-        target: 'http://www.beetgame.cn',
+        target: 'http://115.182.8.10:8000',
         secure: false
       }
     },
